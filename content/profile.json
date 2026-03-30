@@ -1,0 +1,18 @@
+{
+  "name": "戴斌",
+  "title": "产品经理",
+  "tagline": "",
+  "greeting": "您好，我是",
+  "badge": "设计专业出身，致力于用产品与数据创造可落地的用户体验",
+  "bio": "天津大学建筑设计及其理论硕士在读（2026 届），实习经历涉及电商完整交易链路，具备从 B 端到 C 端、正向与逆向交易的完整项目经验。擅长用户洞察、数据驱动迭代与跨团队协作，熟练使用 Axure、ProcessOn、SQL，熟悉大模型与 Agent 架构，可用 Cursor 等工具完成 AI 辅助开发与 MVP 搭建。",
+  "email": "daibb1999@gmail.com",
+  "phone": "166-0029-1287",
+  "showEmail": true,
+  "brandLabel": "戴斌 · Portfolio",
+  "heroImage": "/daibin.jpg",
+  "xiaohongshu": "D.AI",
+  "xiaohongshuUrl": "https://www.xiaohongshu.com/user/profile/680732b6000000000e013e6e?xsec_token=ABDldwdZOCd8Cjomsq7Wl8NxPVWzaXrQkFRbl409OLWJU=&xsec_source=pc_search",
+  "links": [
+    { "label": "GitHub", "href": "https://github.com/summer-dai" }
+  ]
+}

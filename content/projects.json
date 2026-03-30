@@ -1,0 +1,20 @@
+{
+  "vibeCoding": [
+    {
+      "title": "vibe coding：AI 文献管理助手",
+      "description": "独立使用 Cursor 等 AI 工具搭建本地文献管理应用，负责交互与视觉、IndexedDB 数据层及大模型调用配置；支持文献/摘录管理、思维导图与智能摘要。",
+      "href": "https://summer-dai.github.io/ai-/",
+      "tags": ["AI", "独立开发", "IndexedDB"],
+      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
+    }
+  ],
+  "architecture": [
+    {
+      "title": "甘肃金昌南站建筑设计（中标）",
+      "description": "2025.01–2025.05 任设计负责人。通过实地调研梳理「功能 + 情感」需求，协同施工与文化顾问，方案在 11 家单位比选中中标。",
+      "href": "https://github.com/summer-dai",
+      "tags": ["建筑", "主创", "投标"],
+      "image": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80"
+    }
+  ]
+}
