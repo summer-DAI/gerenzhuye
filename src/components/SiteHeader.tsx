@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const navBase = [
   { href: "/", label: "首页", isHash: false },
@@ -39,19 +39,11 @@ export function SiteHeader({
     ...navBase.slice(2),
   ];
   const pathname = usePathname();
-  const [hash, setHash] = useState(() =>
-    typeof window !== "undefined" ? window.location.hash : ""
-  );
   const [activeKey, setActiveKey] = useState<ActiveKey>("home");
-
-  useLayoutEffect(() => {
-    setHash(typeof window !== "undefined" ? window.location.hash : "");
-  }, [pathname]);
 
   useEffect(() => {
     const syncHash = () => {
       const h = typeof window !== "undefined" ? window.location.hash : "";
-      setHash(h);
       if (pathname === "/") {
         if (h === "#experience") setActiveKey("experience");
         else if (
@@ -64,7 +56,6 @@ export function SiteHeader({
       }
     };
 
-    // 根据滚动位置自动高亮（在首页生效）
     const setupObserver = () => {
       if (pathname !== "/") return () => {};
       const elements = [
@@ -93,7 +84,6 @@ export function SiteHeader({
           ) {
             setActiveKey("projects");
           } else {
-            // 都不在视口时，回到首页（首屏）
             if (window.scrollY < 200) setActiveKey("home");
           }
         },
@@ -116,32 +106,32 @@ export function SiteHeader({
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--background)]/70 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b-2 border-border/80 bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:h-16 sm:px-6">
         <Link
           href="/"
-          className="flex items-center gap-2 text-sm font-semibold tracking-tight text-[var(--foreground)]"
+          className="flex items-center gap-2 rounded-2xl px-2 py-1.5 text-sm font-bold tracking-tight text-foreground transition hover:bg-border/30 hover:shadow-chunky-sm"
         >
-          <span aria-hidden className="text-base">
+          <span aria-hidden className="text-lg">
             ⌂
           </span>
-          <span className="hidden sm:inline">{siteBrand}</span>
-          <span className="sm:hidden">主页</span>
+          <span className="hidden font-display sm:inline">{siteBrand}</span>
+          <span className="font-display sm:hidden">主页</span>
         </Link>
-        <nav className="hidden items-center gap-1 sm:flex">
+        <nav className="hidden items-center gap-1.5 sm:flex">
           {nav.map((item) => {
             const active = navItemActive(pathname, activeKey, item);
             return (
               <Link
                 key={item.label}
                 href={item.href}
-                className={`rounded-md px-2 py-1.5 text-xs font-semibold tracking-wide transition-colors sm:px-3 ${
+                className={`rounded-full px-4 py-2 text-xs font-bold tracking-wide transition-all duration-200 ${
                   active
-                    ? "text-[var(--foreground)] underline decoration-2 underline-offset-4"
-                    : "text-[var(--muted)] hover:bg-[var(--border)]/30 hover:text-[var(--foreground)]"
+                    ? "bg-accent text-accent-foreground shadow-chunky-sm"
+                    : "text-muted hover:scale-[1.03] hover:bg-border/40 hover:text-foreground"
                 }`}
               >
-                {item.label.toUpperCase?.() ? item.label : item.label}
+                {item.label}
               </Link>
             );
           })}

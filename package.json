@@ -10,6 +10,7 @@
     "sync:architecture": "node scripts/sync-architecture-folders.mjs"
   },
   "dependencies": {
+    "framer-motion": "^12.38.0",
     "next": "^15.1.0",
     "openai": "^4.77.0",
     "react": "^19.0.0",

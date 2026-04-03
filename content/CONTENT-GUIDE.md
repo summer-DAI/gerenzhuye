@@ -49,7 +49,7 @@
 
 | 字段 | 必填 | 说明 |
 |------|------|------|
-| `kind` | 是 | `education` 教育、`internship` 实习、`campus` 校园 |
+| `kind` | 是 | `education` 教育、`internship` 实习（勿再使用 `campus`，经历区不展示） |
 | `dateRange` | 是 | 展示用时间，如 `2024.06 – 2024.08` |
 | `organization` | 是 | 学校 / 公司 / 组织名称 |
 | `role` | 是 | 职位、专业、职务一行 |
@@ -108,7 +108,7 @@
 }
 ```
 
-教育经历把 `kind` 改成 `"education"`，校园经历改成 `"campus"`。不需要「查看更多」时删掉 `href` 行（同时删掉上一行末尾逗号，保持合法 JSON）。
+教育经历把 `kind` 改成 `"education"`。不需要「查看更多」时删掉 `href` 行（同时删掉上一行末尾逗号，保持合法 JSON）。
 
 ### 在 `projects.json` 的 `projects` 里加一条作品
 

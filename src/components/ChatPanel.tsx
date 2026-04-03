@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { useCallback, useMemo, useRef, useState } from "react";
 
 type Role = "user" | "assistant";
@@ -29,11 +30,11 @@ function AssistantMessageBody({ content }: { content: string }) {
   return (
     <div>
       <div className="whitespace-pre-wrap">{main}</div>
-      <div className="mt-3 border-t border-[var(--border)]/80 pt-3">
-        <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">
-          接一句
+      <div className="mt-3 border-t border-border/80 pt-3">
+        <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-muted">
+          我有个问题
         </p>
-        <p className="whitespace-pre-wrap text-[13px] leading-relaxed text-[var(--muted)]">
+        <p className="whitespace-pre-wrap text-[13px] leading-relaxed text-muted">
           {followup}
         </p>
       </div>
@@ -41,7 +42,13 @@ function AssistantMessageBody({ content }: { content: string }) {
   );
 }
 
+const bubbleUser =
+  "max-w-[85%] rounded-3xl rounded-br-md px-4 py-2.5 text-sm font-medium leading-relaxed bg-accent text-accent-foreground shadow-chunky-sm";
+const bubbleAssistant =
+  "max-w-[85%] rounded-3xl rounded-bl-md border-2 border-border bg-card px-4 py-2.5 text-sm leading-relaxed text-foreground shadow-chunky-sm";
+
 export function ChatPanel() {
+  const reduceMotion = useReducedMotion();
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<{ role: Role; content: string }[]>(
     []
@@ -124,7 +131,6 @@ export function ChatPanel() {
         }
       } catch (e) {
         if (e instanceof DOMException && e.name === "AbortError") {
-          // 用户中止：保留已生成内容，不显示错误
           return;
         }
         const msg = e instanceof Error ? e.message : "请求失败";
@@ -174,15 +180,15 @@ export function ChatPanel() {
   );
 
   return (
-    <div className="flex flex-col rounded-xl border border-[var(--border)] bg-[var(--card)]">
+    <div className="flex flex-col overflow-hidden rounded-3xl border-2 border-border bg-card shadow-chunky">
       <div className="max-h-[min(420px,50vh)] space-y-4 overflow-y-auto p-4 sm:p-6">
         {messages.length === 0 ? (
           <div className="space-y-4">
             <div className="space-y-1">
-              <p className="text-sm font-medium text-[var(--foreground)]">
+              <p className="text-sm font-bold text-foreground">
                 想聊啥都行：作品亮点、经历细节、技能栈、合作方式……随便点下面一句也行。
               </p>
-              <p className="text-sm text-[var(--muted)]">
+              <p className="text-sm text-muted">
                 我会主要依据站长在本站公开的简介和整理好的资料来答；没写到的细节我可能帮不上，提前说声抱歉啦～
               </p>
             </div>
@@ -193,7 +199,7 @@ export function ChatPanel() {
                   type="button"
                   disabled={loading}
                   onClick={() => void sendText(p)}
-                  className="rounded-full border border-[var(--border)] bg-[var(--background)]/50 px-3 py-1.5 text-xs font-medium text-[var(--foreground)] transition hover:bg-[var(--background)] disabled:opacity-60"
+                  className="rounded-full border-2 border-border bg-background/70 px-3 py-2 text-xs font-bold text-foreground transition hover:-translate-y-0.5 hover:border-accent hover:shadow-chunky-sm disabled:opacity-60"
                 >
                   {p}
                 </button>
@@ -207,16 +213,18 @@ export function ChatPanel() {
             className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                m.role === "user"
-                  ? "bg-[var(--accent)] text-white"
-                  : "bg-[var(--border)]/60 text-[var(--foreground)]"
-              }`}
+              className={
+                m.role === "user" ? bubbleUser : bubbleAssistant
+              }
             >
               {m.role === "user" ? (
                 <span className="whitespace-pre-wrap">{m.content}</span>
               ) : !m.content && loading ? (
-                "…"
+                <span className="inline-flex items-center gap-1">
+                  <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-accent" />
+                  <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-accent [animation-delay:150ms]" />
+                  <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-accent [animation-delay:300ms]" />
+                </span>
               ) : (
                 <AssistantMessageBody content={m.content} />
               )}
@@ -227,15 +235,20 @@ export function ChatPanel() {
       </div>
 
       {error ? (
-        <div className="border-t border-[var(--border)] px-4 py-3 sm:px-6">
+        <div
+          key={error}
+          className="border-t-2 border-border px-4 py-3 motion-reduce:animate-none animate-shake sm:px-6"
+        >
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div className="text-sm text-red-600 dark:text-red-400">{error}</div>
+            <div className="text-sm font-semibold text-red-600 dark:text-red-400">
+              {error}
+            </div>
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={retry}
                 disabled={loading || !lastUserTextRef.current}
-                className="rounded-lg border border-[var(--border)] bg-[var(--background)]/60 px-3 py-1.5 text-xs font-semibold text-[var(--foreground)] transition hover:bg-[var(--background)] disabled:opacity-50"
+                className="rounded-xl border-2 border-border bg-background/80 px-3 py-2 text-xs font-bold text-foreground transition hover:bg-background disabled:opacity-50"
               >
                 重试
               </button>
@@ -243,7 +256,7 @@ export function ChatPanel() {
                 type="button"
                 onClick={() => setError(null)}
                 disabled={loading}
-                className="rounded-lg px-3 py-1.5 text-xs font-medium text-[var(--muted)] hover:bg-[var(--border)]/40 disabled:opacity-50"
+                className="rounded-xl px-3 py-2 text-xs font-semibold text-muted hover:bg-border/40 disabled:opacity-50"
               >
                 关闭
               </button>
@@ -252,7 +265,7 @@ export function ChatPanel() {
         </div>
       ) : null}
 
-      <div className="flex flex-col gap-3 border-t border-[var(--border)] p-4 sm:flex-row sm:items-end sm:p-6">
+      <div className="flex flex-col gap-3 border-t-2 border-border p-4 sm:flex-row sm:items-end sm:p-6">
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -265,22 +278,31 @@ export function ChatPanel() {
           placeholder="输入你的问题…（Enter 发送，Shift+Enter 换行）"
           rows={3}
           disabled={loading}
-          className="min-h-[88px] flex-1 resize-y rounded-lg border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-sm text-[var(--foreground)] placeholder:text-[var(--muted)] focus:border-[var(--accent)] focus:outline-none focus:ring-1 focus:ring-[var(--accent)] disabled:opacity-60"
+          className="min-h-[88px] flex-1 resize-y rounded-2xl border-2 border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30 disabled:opacity-60"
         />
         <div className="flex shrink-0 gap-2 sm:flex-col">
-          <button
+          <motion.button
             type="button"
             onClick={() => void send()}
             disabled={loading || !input.trim()}
-            className="rounded-lg bg-[var(--accent)] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[var(--accent-hover)] disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-2xl bg-accent px-4 py-2.5 text-sm font-bold text-accent-foreground shadow-chunky-sm transition hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50"
+            whileTap={reduceMotion ? undefined : { scale: 0.94 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.02 }}
           >
-            {loading ? "生成中…" : "发送"}
-          </button>
+            {loading ? (
+              <span className="inline-flex items-center gap-1">
+                <span className="h-2 w-2 animate-pulse-soft rounded-full bg-accent-foreground/90" />
+                生成中…
+              </span>
+            ) : (
+              "发送"
+            )}
+          </motion.button>
           <button
             type="button"
             onClick={stop}
             disabled={!loading}
-            className="rounded-lg border border-[var(--border)] px-4 py-2.5 text-sm font-medium text-[var(--foreground)] transition-colors hover:bg-[var(--border)]/50 disabled:opacity-50"
+            className="rounded-2xl border-2 border-border px-4 py-2.5 text-sm font-bold text-foreground transition hover:bg-border/40 disabled:opacity-50"
           >
             停止
           </button>
@@ -288,7 +310,7 @@ export function ChatPanel() {
             type="button"
             onClick={clear}
             disabled={loading}
-            className="rounded-lg border border-[var(--border)] px-4 py-2.5 text-sm font-medium text-[var(--muted)] transition-colors hover:bg-[var(--border)]/50 disabled:opacity-50"
+            className="rounded-2xl border-2 border-border px-4 py-2.5 text-sm font-semibold text-muted transition hover:bg-border/40 disabled:opacity-50"
           >
             清空对话
           </button>

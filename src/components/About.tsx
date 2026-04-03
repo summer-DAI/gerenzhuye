@@ -7,20 +7,20 @@ export function About({ profile }: { profile: Profile }) {
       className="scroll-mt-20 px-4 py-16 sm:px-6 sm:py-20"
     >
       <div className="mx-auto max-w-6xl">
-        <h2 className="mb-6 text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
+        <h2 className="font-display mb-6 text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
           关于
         </h2>
-        <p className="max-w-3xl whitespace-pre-wrap leading-relaxed text-[var(--muted)]">
+        <p className="max-w-3xl whitespace-pre-wrap leading-relaxed text-muted">
           {profile.bio}
         </p>
         {profile.phone || (profile.showEmail && profile.email) ? (
-          <div className="mt-6 flex flex-col gap-2 text-sm text-[var(--muted)] sm:flex-row sm:flex-wrap sm:gap-x-8">
+          <div className="mt-6 flex flex-col gap-2 text-sm text-muted sm:flex-row sm:flex-wrap sm:gap-x-8">
             {profile.phone ? (
               <p>
                 手机：{" "}
                 <a
                   href={`tel:${profile.phone.replace(/\s/g, "")}`}
-                  className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+                  className="font-semibold text-accent underline-offset-4 hover:underline"
                 >
                   {profile.phone}
                 </a>
@@ -31,7 +31,7 @@ export function About({ profile }: { profile: Profile }) {
                 邮箱：{" "}
                 <a
                   href={`mailto:${profile.email}`}
-                  className="font-medium text-[var(--accent)] underline-offset-4 hover:underline"
+                  className="font-semibold text-accent underline-offset-4 hover:underline"
                 >
                   {profile.email}
                 </a>
@@ -47,7 +47,7 @@ export function About({ profile }: { profile: Profile }) {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--card)] px-4 py-2 text-sm font-medium text-[var(--foreground)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                  className="inline-flex items-center rounded-full border-2 border-border bg-card px-4 py-2 text-sm font-bold text-foreground shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent hover:shadow-chunky"
                 >
                   {link.label}
                 </a>

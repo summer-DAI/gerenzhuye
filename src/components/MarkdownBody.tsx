@@ -15,7 +15,7 @@ function renderInline(text: string): ReactNode {
       <a
         key={`lnk-${m.index}-${k++}`}
         href={href}
-        className="text-[var(--accent)] underline underline-offset-2 hover:opacity-90"
+        className="font-semibold text-accent underline underline-offset-2 hover:opacity-90"
         {...(href.startsWith("http")
           ? { target: "_blank", rel: "noopener noreferrer" }
           : {})}
@@ -48,7 +48,7 @@ export function MarkdownBody({ text }: { text: string }) {
       blocks.push(
         <h2
           key={key++}
-          className="mt-8 text-lg font-bold tracking-tight text-[var(--foreground)] first:mt-0"
+          className="font-display mt-8 text-lg font-extrabold tracking-tight text-foreground first:mt-0"
         >
           {line.slice(3)}
         </h2>
@@ -65,7 +65,7 @@ export function MarkdownBody({ text }: { text: string }) {
       blocks.push(
         <ul
           key={key++}
-          className="mt-3 list-inside list-disc space-y-1.5 text-sm leading-relaxed text-[var(--muted)]"
+          className="mt-3 list-inside list-disc space-y-1.5 text-sm leading-relaxed text-muted"
         >
           {items.map((t, idx) => (
             <li key={idx}>{renderInline(t)}</li>
@@ -88,7 +88,7 @@ export function MarkdownBody({ text }: { text: string }) {
     blocks.push(
       <p
         key={key++}
-        className="mt-3 text-sm leading-relaxed text-[var(--muted)] first:mt-0"
+        className="mt-3 text-sm leading-relaxed text-muted first:mt-0"
       >
         {renderInline(para.join(" "))}
       </p>

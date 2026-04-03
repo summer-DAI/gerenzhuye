@@ -3,29 +3,41 @@
 @tailwind utilities;
 
 :root {
-  /* reference-style: cream background + deep navy */
-  --background: #f6f1ea;
-  --foreground: #0b1f4a;
-  --muted: #53627a;
-  --card: #fbf7f1;
-  --border: rgba(11, 31, 74, 0.12);
-  --accent: #2b60ff;
-  --accent-hover: #1f4fe6;
+  /* Playful mint + forest green (not Duolingo brand colors) */
+  --background: #ecf8f1;
+  --foreground: #0f2d24;
+  --muted: #4f6f62;
+  --card: #fefffc;
+  --border: rgba(15, 45, 36, 0.14);
+  --accent: #18a058;
+  --accent-hover: #148a4a;
+  --accent-foreground: #ffffff;
+  --warm: #f0a020;
+  --warm-foreground: #3a2208;
+  --radius-card: 28px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0b1020;
-    --foreground: #eaf0ff;
-    --muted: #a9b6d0;
-    --card: rgba(234, 240, 255, 0.06);
-    --border: rgba(234, 240, 255, 0.14);
-    --accent: #7aa2ff;
-    --accent-hover: #9bb8ff;
+    --background: #0c1814;
+    --foreground: #e8f7f0;
+    --muted: #8fb3a4;
+    --card: rgba(255, 255, 255, 0.06);
+    --border: rgba(232, 247, 240, 0.14);
+    --accent: #3ecf8e;
+    --accent-hover: #5ad9a0;
+    --accent-foreground: #052018;
+    --warm: #fbbf24;
+    --warm-foreground: #1a1406;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+  background-image: radial-gradient(
+    ellipse 120% 80% at 50% -20%,
+    rgba(24, 160, 88, 0.12),
+    transparent 55%
+  );
 }

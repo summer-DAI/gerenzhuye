@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_SC } from "next/font/google";
+import { Nunito, Noto_Sans_SC } from "next/font/google";
 
 import { FloatingAskButton } from "@/components/FloatingAskButton";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -12,6 +12,13 @@ const notoSans = Noto_Sans_SC({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -32,17 +39,17 @@ export default function RootLayout({
     projectExperience.length > 0 ? "/#project-experience" : "/#vibe";
 
   return (
-      <html lang="zh-CN" className={notoSans.variable}>
-        <body
-          className={`${notoSans.className} min-h-screen antialiased font-sans`}
-        >
-          <div className="flex min-h-screen flex-col">
-            <SiteHeader siteBrand={siteBrand} worksHref={worksHref} />
-            <main className="flex-1">{children}</main>
-            <SiteFooter />
-          </div>
-          <FloatingAskButton />
-        </body>
-      </html>
-    );
+    <html lang="zh-CN" className={`${notoSans.variable} ${nunito.variable}`}>
+      <body
+        className={`${notoSans.className} min-h-screen antialiased font-sans`}
+      >
+        <div className="flex min-h-screen flex-col">
+          <SiteHeader siteBrand={siteBrand} worksHref={worksHref} />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </div>
+        <FloatingAskButton />
+      </body>
+    </html>
+  );
 }

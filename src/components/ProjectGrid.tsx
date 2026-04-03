@@ -6,7 +6,7 @@ import type { Project } from "@/types/content";
 export function ProjectGrid({ projects }: { projects: Project[] }) {
   if (projects.length === 0) {
     return (
-      <p className="text-[var(--muted)]">
+      <p className="text-muted">
         暂无作品，请在 content/projects.json 中添加。
       </p>
     );
@@ -18,26 +18,26 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
         const key = project.slug ?? project.href + project.title;
         const internal = project.href.startsWith("/");
         const className =
-          "group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-sm transition-shadow hover:shadow-md hover:shadow-slate-200/60 dark:hover:shadow-slate-900/40";
+          "group flex h-full flex-col overflow-hidden rounded-3xl border-2 border-border bg-card shadow-chunky-sm transition-all duration-200 hover:-translate-y-1 hover:scale-[1.01] hover:shadow-chunky";
 
         const inner = (
           <>
             {project.image ? (
-              <div className="relative aspect-[16/9] w-full overflow-hidden bg-[var(--border)]/30">
+              <div className="relative aspect-[16/9] w-full overflow-hidden bg-border/30">
                 <Image
                   src={project.image}
                   alt=""
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                   sizes="(max-width: 640px) 100vw, 50vw"
                 />
               </div>
             ) : null}
             <div className="flex flex-1 flex-col p-5">
-              <h3 className="text-lg font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)]">
+              <h3 className="font-display text-lg font-bold text-foreground group-hover:text-accent">
                 {project.title}
               </h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--muted)]">
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
                 {project.description}
               </p>
               {project.tags.length > 0 ? (
@@ -45,7 +45,7 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
                   {project.tags.map((tag) => (
                     <li
                       key={tag}
-                      className="rounded-md bg-[var(--border)]/60 px-2 py-0.5 text-xs text-[var(--muted)]"
+                      className="rounded-full bg-accent/12 px-3 py-1 text-xs font-semibold text-foreground dark:bg-accent/18"
                     >
                       {tag}
                     </li>

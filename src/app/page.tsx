@@ -9,6 +9,9 @@ import {
   loadProjects,
 } from "@/lib/content";
 
+const sectionLinkClass =
+  "inline-flex w-fit items-center gap-1 rounded-full border-2 border-accent/40 bg-accent/10 px-4 py-2 text-sm font-bold text-accent transition hover:-translate-y-0.5 hover:border-accent hover:bg-accent/15 hover:shadow-chunky-sm";
+
 export default function HomePage() {
   const profile = loadProfile();
   const { vibeCoding, architecture, projectExperience } = loadProjects();
@@ -25,23 +28,20 @@ export default function HomePage() {
       {projectExperience.length > 0 ? (
         <section
           id="project-experience"
-          className="scroll-mt-20 border-t border-[var(--border)] px-4 py-16 sm:px-6 sm:py-20"
+          className="scroll-mt-20 border-t-2 border-border/70 px-4 py-16 sm:px-6 sm:py-20"
         >
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <h2 className="text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
+                <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
                   项目经历
                 </h2>
-                <p className="mt-2 text-[var(--muted)]">
+                <p className="mt-2 text-muted">
                   实习与课题等偏「项目产出」的展示。
                 </p>
               </div>
-              <Link
-                href="/projects/project-experience"
-                className="w-fit text-sm font-semibold text-[var(--accent)] transition hover:underline"
-              >
-                独立页面 →
+              <Link href="/projects/project-experience" className={sectionLinkClass}>
+                去看看 →
               </Link>
             </div>
             <ProjectGrid projects={projectExperience} />
@@ -51,23 +51,18 @@ export default function HomePage() {
 
       <section
         id="vibe"
-        className="scroll-mt-20 border-t border-[var(--border)] px-4 py-16 sm:px-6 sm:py-20"
+        className="scroll-mt-20 border-t-2 border-border/70 px-4 py-16 sm:px-6 sm:py-20"
       >
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
+              <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
                 Vibe Coding
               </h2>
-              <p className="mt-2 text-[var(--muted)]">
-                产品与 AI 工具相关作品。
-              </p>
+              <p className="mt-2 text-muted">产品与 AI 工具相关作品。</p>
             </div>
-            <Link
-              href="/projects/vibe"
-              className="w-fit text-sm font-semibold text-[var(--accent)] transition hover:underline"
-            >
-              独立页面 →
+            <Link href="/projects/vibe" className={sectionLinkClass}>
+              去看看 →
             </Link>
           </div>
           <ProjectGrid projects={vibeCoding} />
@@ -76,23 +71,20 @@ export default function HomePage() {
 
       <section
         id="architecture"
-        className="scroll-mt-20 border-t border-[var(--border)] px-4 py-16 sm:px-6 sm:py-20"
+        className="scroll-mt-20 border-t-2 border-border/70 px-4 py-16 sm:px-6 sm:py-20"
       >
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
+              <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
                 建筑设计
               </h2>
-              <p className="mt-2 text-[var(--muted)]">
+              <p className="mt-2 text-muted">
                 建筑与空间设计作品；每个项目有独立详情页。
               </p>
             </div>
-            <Link
-              href="/projects/architecture"
-              className="w-fit text-sm font-semibold text-[var(--accent)] transition hover:underline"
-            >
-              独立页面 →
+            <Link href="/projects/architecture" className={sectionLinkClass}>
+              去看看 →
             </Link>
           </div>
           <ProjectGrid projects={architecture} />

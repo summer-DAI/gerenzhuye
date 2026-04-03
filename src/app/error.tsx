@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 export default function Error({
-  error,
+  error: _error,
   reset,
 }: {
   error: Error & { digest?: string };
@@ -11,23 +11,23 @@ export default function Error({
 }) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <h1 className="text-2xl font-bold tracking-tight text-[var(--foreground)]">
+      <h1 className="font-display text-2xl font-extrabold tracking-tight text-foreground">
         页面出错了
       </h1>
-      <p className="mt-3 text-sm text-[var(--muted)]">
+      <p className="mt-3 text-sm text-muted">
         你可以重试一次。如果持续出现，请把控制台/终端报错发我。
       </p>
-      <div className="mt-6 flex gap-2">
+      <div className="mt-6 flex flex-wrap gap-3">
         <button
           type="button"
           onClick={reset}
-          className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--accent-hover)]"
+          className="rounded-2xl bg-accent px-5 py-2.5 text-sm font-bold text-accent-foreground shadow-chunky-sm transition hover:bg-accent-hover"
         >
           重试
         </button>
         <Link
           href="/"
-          className="rounded-lg border border-[var(--border)] px-4 py-2 text-sm font-semibold text-[var(--foreground)] hover:bg-[var(--border)]/40"
+          className="rounded-2xl border-2 border-border bg-card px-5 py-2.5 text-sm font-bold text-foreground shadow-chunky-sm transition hover:-translate-y-0.5 hover:shadow-chunky"
         >
           返回首页
         </Link>
@@ -35,4 +35,3 @@ export default function Error({
     </div>
   );
 }
-

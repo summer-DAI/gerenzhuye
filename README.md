@@ -34,7 +34,7 @@ npm run dev
 | 文件 | 作用 |
 |------|------|
 | `content/profile.json` | 姓名、头衔、简介、手机、邮箱、链接、小红书；可选 `greeting`、`badge`、`heroImage`、`brandLabel`（顶栏站点名） |
-| `content/experience.json` | 经历卡片：`kind` 为 `education`（教育）\|`internship`（实习）\|`campus`（校园）；含时间、机构、职位、要点，可选 `logo`、`href` |
+| `content/experience.json` | 经历卡片：`kind` 为 `education`（教育）或 `internship`（实习）；含时间、机构、职位、要点，可选 `logo`、`href` |
 | `content/projects.json` | 作品列表（`vibeCoding` 与 `architecture` 两组） |
 | `content/knowledge.md` | 供「问我」使用的知识库（Markdown） |
 
