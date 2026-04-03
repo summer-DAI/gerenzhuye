@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync:architecture": "node scripts/sync-architecture-folders.mjs"
   },
   "dependencies": {
     "next": "^15.1.0",

@@ -16,11 +16,7 @@ export default function AskPage() {
           问我
         </h1>
         <p className="mt-2 text-[var(--muted)]">
-          回答由大模型根据你仓库中的知识库生成；修改{" "}
-          <code className="rounded bg-[var(--border)] px-1 py-0.5 text-xs">
-            content/knowledge.md
-          </code>{" "}
-          后重新部署即可更新。
+          想聊作品、经历、技能或者合作方式都可以，随便问～我会根据站长在本站公开的简介和资料来回答；资料里没写到的，我会直说「不清楚」，不瞎编。
         </p>
       </div>
       <ChatPanel />

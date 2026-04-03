@@ -11,13 +11,44 @@ import {
 
 export default function HomePage() {
   const profile = loadProfile();
-  const { vibeCoding, architecture } = loadProjects();
+  const { vibeCoding, architecture, projectExperience } = loadProjects();
   const { items } = loadExperience();
 
   return (
     <>
-      <Hero profile={profile} />
+      <Hero
+        profile={profile}
+        showProjectExperienceLink={projectExperience.length > 0}
+      />
       <ExperienceSection items={items} />
+
+      {projectExperience.length > 0 ? (
+        <section
+          id="project-experience"
+          className="scroll-mt-20 border-t border-[var(--border)] px-4 py-16 sm:px-6 sm:py-20"
+        >
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
+                  项目经历
+                </h2>
+                <p className="mt-2 text-[var(--muted)]">
+                  实习与课题等偏「项目产出」的展示。
+                </p>
+              </div>
+              <Link
+                href="/projects/project-experience"
+                className="w-fit text-sm font-semibold text-[var(--accent)] transition hover:underline"
+              >
+                独立页面 →
+              </Link>
+            </div>
+            <ProjectGrid projects={projectExperience} />
+          </div>
+        </section>
+      ) : null}
+
       <section
         id="vibe"
         className="scroll-mt-20 border-t border-[var(--border)] px-4 py-16 sm:px-6 sm:py-20"
@@ -29,14 +60,14 @@ export default function HomePage() {
                 Vibe Coding
               </h2>
               <p className="mt-2 text-[var(--muted)]">
-                产品与 AI 工具相关作品（在 content/projects.json 的 vibeCoding 维护）。
+                产品与 AI 工具相关作品。
               </p>
             </div>
             <Link
-              href="/ask"
-              className="inline-flex w-fit items-center justify-center rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-orange-600"
+              href="/projects/vibe"
+              className="w-fit text-sm font-semibold text-[var(--accent)] transition hover:underline"
             >
-              基于知识库提问
+              独立页面 →
             </Link>
           </div>
           <ProjectGrid projects={vibeCoding} />
@@ -48,13 +79,21 @@ export default function HomePage() {
         className="scroll-mt-20 border-t border-[var(--border)] px-4 py-16 sm:px-6 sm:py-20"
       >
         <div className="mx-auto max-w-6xl">
-          <div className="mb-10">
-            <h2 className="text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
-              建筑设计
-            </h2>
-            <p className="mt-2 text-[var(--muted)]">
-              建筑与空间设计作品（在 content/projects.json 的 architecture 维护）。
-            </p>
+          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight text-[var(--foreground)] sm:text-3xl">
+                建筑设计
+              </h2>
+              <p className="mt-2 text-[var(--muted)]">
+                建筑与空间设计作品；每个项目有独立详情页。
+              </p>
+            </div>
+            <Link
+              href="/projects/architecture"
+              className="w-fit text-sm font-semibold text-[var(--accent)] transition hover:underline"
+            >
+              独立页面 →
+            </Link>
           </div>
           <ProjectGrid projects={architecture} />
         </div>

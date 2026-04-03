@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import type { Project } from "@/types/content";
 
@@ -13,14 +14,14 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
 
   return (
     <ul className="grid gap-6 sm:grid-cols-2 lg:gap-8">
-      {projects.map((project) => (
-        <li key={project.title}>
-          <a
-            href={project.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-sm transition-shadow hover:shadow-md hover:shadow-slate-200/60 dark:hover:shadow-slate-900/40"
-          >
+      {projects.map((project) => {
+        const key = project.slug ?? project.href + project.title;
+        const internal = project.href.startsWith("/");
+        const className =
+          "group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-sm transition-shadow hover:shadow-md hover:shadow-slate-200/60 dark:hover:shadow-slate-900/40";
+
+        const inner = (
+          <>
             {project.image ? (
               <div className="relative aspect-[16/9] w-full overflow-hidden bg-[var(--border)]/30">
                 <Image
@@ -52,9 +53,28 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
                 </ul>
               ) : null}
             </div>
-          </a>
-        </li>
-      ))}
+          </>
+        );
+
+        return (
+          <li key={key}>
+            {internal ? (
+              <Link href={project.href} className={className}>
+                {inner}
+              </Link>
+            ) : (
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={className}
+              >
+                {inner}
+              </a>
+            )}
+          </li>
+        );
+      })}
     </ul>
   );
 }

@@ -13,10 +13,11 @@
 | 顶栏左侧标题 | `profile.json` | `brandLabel`（可选）；不填则用 `name` 组合默认文案 |
 | Hero：问候语、姓名、小字头衔、大标题、深色标签条、正文段落 | `profile.json` | `greeting`、`name`、`title`、`tagline`、`badge`、`bio` |
 | Hero 右侧照片 | `profile.json` | `heroImage`（完整图片 URL，需已在 [next.config.ts](../next.config.ts) 里配置对应图片域名） |
-| 底部三个按钮（经历 / 作品 / 联系） | — | 锚点写在代码里，一般不用改 |
+| Hero 按钮（经历 / 三类作品） | — | 「经历」锚到首页 `#experience`；「vibe / 建筑 / 项目经历」进入对应二级页 `/projects/...` |
 | 首页联系方式（手机/邮箱/GitHub/小红书） | `profile.json` | `phone`、`email`、`showEmail`、`links`、`xiaohongshu`、`xiaohongshuUrl` |
 | 「经历」时间轴（教育/实习 Tab） | `experience.json` | `items` 数组里每一条（见下表） |
-| 「作品」卡片（Vibe / 建筑 两区块） | `projects.json` | `vibeCoding` 数组与 `architecture` 数组 |
+| 「作品」卡片（Vibe / 建筑 / 项目经历 三区块） | `projects.json` | `vibeCoding`、`architecture`、`projectExperience` 三个数组；**展示顺序**为：项目经历 → Vibe → 建筑。`projectExperience` 为空时首页不显示该区块与 Hero「项目经历」按钮 |
+| 建筑单项详情页 | `content/architecture/{slug}.md` | 与 `projects.json` 里 `architecture[].slug` 对应；六个建筑项目另有独立路由 `/projects/architecture/{slug}` |
 | 「问我」里 AI 能引用的文字 | `knowledge.md` | 任意 Markdown |
 
 ---
@@ -62,12 +63,15 @@
 
 ## `projects.json` 结构
 
-根对象是两组数组：`vibeCoding` 与 `architecture`，结构如下：
+根对象是三组数组：`vibeCoding`、`architecture`、`projectExperience`（结构与单条作品基本相同）。汇总页分别为 `/projects/vibe`、`/projects/architecture`、`/projects/project-experience`。
+
+**建筑类**每条可增加 `slug`（英文短横线命名），并令 `href` 为 `/projects/architecture/{slug}`，则自动生成详情页；正文写在 `content/architecture/{slug}.md`。本地封面可放 `public/architecture/{slug}/cover.jpg`，`image` 填 `"/architecture/{slug}/cover.jpg"`。仓库根目录的 `architecture-projects/` 说明见该文件夹内 README。
 
 ```json
 {
   "vibeCoding": [ /* Project[] */ ],
-  "architecture": [ /* Project[] */ ]
+  "architecture": [ /* Project[]，建筑项可有 slug + 站内 href */ ],
+  "projectExperience": [ /* Project[] */ ]
 }
 ```
 
@@ -77,9 +81,10 @@
 |------|------|------|
 | `title` | 是 | 作品标题 |
 | `description` | 是 | 简短描述 |
-| `href` | 是 | 跳转链接 |
+| `href` | 是 | 外链以 `https://` 开头；站内建筑详情以 `/` 开头，如 `/projects/architecture/xxx` |
 | `tags` | 是 | 标签字符串数组，没有则写 `[]` |
 | `image` | 否 | 封面图 URL |
+| `slug` | 否 | 仅建筑详情用，与 `content/architecture/{slug}.md` 一致 |
 
 ---
 

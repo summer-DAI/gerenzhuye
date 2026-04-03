@@ -4,17 +4,92 @@
       "title": "vibe coding：AI 文献管理助手",
       "description": "独立使用 Cursor 等 AI 工具搭建本地文献管理应用，负责交互与视觉、IndexedDB 数据层及大模型调用配置；支持文献/摘录管理、思维导图与智能摘要。",
       "href": "https://summer-dai.github.io/ai-/",
-      "tags": ["AI", "独立开发", "IndexedDB"],
+      "tags": [
+        "AI",
+        "独立开发",
+        "IndexedDB"
+      ],
       "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
     }
   ],
   "architecture": [
     {
-      "title": "甘肃金昌南站建筑设计（中标）",
-      "description": "2025.01–2025.05 任设计负责人。通过实地调研梳理「功能 + 情感」需求，协同施工与文化顾问，方案在 11 家单位比选中中标。",
+      "slug": "ersha-1956-chuangyiyuan",
+      "title": "二砂1956时尚创意园",
+      "description": "工业遗存与时尚创意园区相关设计。",
+      "href": "/projects/architecture/ersha-1956-chuangyiyuan",
+      "tags": [
+        "更新",
+        "园区"
+      ],
+      "image": "/architecture/ersha-1956-chuangyiyuan/%E6%88%B4%E6%96%8C-%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E5%BB%BA%E7%AD%91%E5%AD%A6%E7%A1%95%E5%A3%AB_26_01.png"
+    },
+    {
+      "slug": "chengshi-kazi",
+      "title": "城市卡子",
+      "description": "城市节点与公共空间设计。",
+      "href": "/projects/architecture/chengshi-kazi",
+      "tags": [
+        "城市",
+        "公共空间"
+      ],
+      "image": "/architecture/chengshi-kazi/%E6%88%B4%E6%96%8C-%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E5%BB%BA%E7%AD%91%E5%AD%A6%E7%A1%95%E5%A3%AB_22_01.png"
+    },
+    {
+      "slug": "changzhou-nanzhan",
+      "title": "常州南站",
+      "description": "铁路站房与枢纽设计。",
+      "href": "/projects/architecture/changzhou-nanzhan",
+      "tags": [
+        "交通建筑",
+        "站房"
+      ],
+      "image": "/architecture/changzhou-nanzhan/%E6%88%B4%E6%96%8C-%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E5%BB%BA%E7%AD%91%E5%AD%A6%E7%A1%95%E5%A3%AB_4_01.png"
+    },
+    {
+      "slug": "yulin-nanzhan",
+      "title": "榆林南站",
+      "description": "铁路站房与枢纽设计。",
+      "href": "/projects/architecture/yulin-nanzhan",
+      "tags": [
+        "交通建筑",
+        "站房"
+      ],
+      "image": "/architecture/yulin-nanzhan/%E6%88%B4%E6%96%8C-%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E5%BB%BA%E7%AD%91%E5%AD%A6%E7%A1%95%E5%A3%AB_10_01.png"
+    },
+    {
+      "slug": "lingjing-shudian",
+      "title": "灵境书店",
+      "description": "文化建筑与阅读空间设计。",
+      "href": "/projects/architecture/lingjing-shudian",
+      "tags": [
+        "文化",
+        "书店"
+      ],
+      "image": "/architecture/lingjing-shudian/%E6%88%B4%E6%96%8C-%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E5%BB%BA%E7%AD%91%E5%AD%A6%E7%A1%95%E5%A3%AB_18_01.png"
+    },
+    {
+      "slug": "jinchang-nanzhan",
+      "title": "金昌南站",
+      "description": "站房建筑设计（含方案与图纸）。",
+      "href": "/projects/architecture/jinchang-nanzhan",
+      "tags": [
+        "交通建筑",
+        "站房"
+      ],
+      "image": "/architecture/jinchang-nanzhan/%E6%88%B4%E6%96%8C-%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E5%BB%BA%E7%AD%91%E5%AD%A6%E7%A1%95%E5%A3%AB_15_01.png"
+    }
+  ],
+  "projectExperience": [
+    {
+      "title": "示例：交易链路体验优化（可替换）",
+      "description": "在实习中参与的项目示例：可写背景、你的角色、关键产出与指标。",
       "href": "https://github.com/summer-dai",
-      "tags": ["建筑", "主创", "投标"],
-      "image": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80"
+      "tags": [
+        "实习",
+        "产品"
+      ],
+      "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80"
     }
   ]
 }

@@ -4,7 +4,7 @@ import { Noto_Sans_SC } from "next/font/google";
 import { FloatingAskButton } from "@/components/FloatingAskButton";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { loadProfile } from "@/lib/content";
+import { loadProfile, loadProjects } from "@/lib/content";
 
 import "./globals.css";
 
@@ -27,19 +27,22 @@ export default function RootLayout({
 }>) {
   const profile = loadProfile();
   const siteBrand = profile.brandLabel ?? `${profile.name} · Portfolio`;
+  const { projectExperience } = loadProjects();
+  const worksHref =
+    projectExperience.length > 0 ? "/#project-experience" : "/#vibe";
 
   return (
-    <html lang="zh-CN" className={notoSans.variable}>
-      <body
-        className={`${notoSans.className} min-h-screen antialiased font-sans`}
-      >
-        <div className="flex min-h-screen flex-col">
-          <SiteHeader siteBrand={siteBrand} />
-          <main className="flex-1">{children}</main>
-          <SiteFooter />
-        </div>
-        <FloatingAskButton />
-      </body>
-    </html>
-  );
+      <html lang="zh-CN" className={notoSans.variable}>
+        <body
+          className={`${notoSans.className} min-h-screen antialiased font-sans`}
+        >
+          <div className="flex min-h-screen flex-col">
+            <SiteHeader siteBrand={siteBrand} worksHref={worksHref} />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+          </div>
+          <FloatingAskButton />
+        </body>
+      </html>
+    );
 }

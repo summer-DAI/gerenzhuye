@@ -25,9 +25,12 @@ export interface Profile {
 export interface Project {
   title: string;
   description: string;
+  /** 站内路径以 `/` 开头（如 `/projects/architecture/xxx`）时用 Next Link；外链用 https */
   href: string;
   image?: string;
   tags: string[];
+  /** 建筑类二级页 slug，与 `content/architecture/{slug}.md` 及可选 `public/architecture/{slug}/` 对应 */
+  slug?: string;
 }
 
 export interface ProjectsFile {
@@ -37,6 +40,8 @@ export interface ProjectsFile {
 export interface ProjectsFileV2 {
   vibeCoding: Project[];
   architecture: Project[];
+  /** 与 vibe / 建筑同级的「项目经历」类作品（实习项目、课题等） */
+  projectExperience: Project[];
 }
 
 export type ExperienceKind = "education" | "internship" | "campus";
