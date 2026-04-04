@@ -63,28 +63,48 @@
 
 ## `projects.json` 结构
 
-根对象是三组数组：`vibeCoding`、`architecture`、`projectExperience`（结构与单条作品基本相同）。汇总页分别为 `/projects/vibe`、`/projects/architecture`、`/projects/project-experience`。
+根对象是三组数组：`vibeCoding`、`architecture`、`projectExperience`（结构与单条作品基本相同），以及可选对象 **`projectExperienceFlow`**（项目经历二级页文案）。汇总页分别为 `/projects/vibe`、`/projects/architecture`、`/projects/project-experience`。
+
+**项目经历二级页**（`/projects/project-experience`）按电商 **下单 → 履约 → 售后** 三环节展示：`projectExperience` 里每条应使用**站内** `href`（推荐 `/projects/project-experience#p-{slug}`，与 `slug` 一致），这样首页卡片点击进入站内流程页并锚点到对应项目，而不会跳到外链主页。可选 `externalUrl` 单独展示「相关链接（外链）」。
 
 **建筑类**每条可增加 `slug`（英文短横线命名），并令 `href` 为 `/projects/architecture/{slug}`，则自动生成详情页；正文写在 `content/architecture/{slug}.md`。本地封面可放 `public/architecture/{slug}/cover.jpg`，`image` 填 `"/architecture/{slug}/cover.jpg"`。仓库根目录的 `architecture-projects/` 说明见该文件夹内 README。
 
 ```json
 {
+  "projectExperienceFlow": { "pageTitle": "…", "pageSubtitle": "…", "stages": [ /* 三环节说明 */ ] },
   "vibeCoding": [ /* Project[] */ ],
   "architecture": [ /* Project[]，建筑项可有 slug + 站内 href */ ],
-  "projectExperience": [ /* Project[] */ ]
+  "projectExperience": [ /* Project[]，见下「项目经历专用字段」 */ ]
 }
 ```
 
-每个数组里的每一项（Project）字段如下：
+`projectExperienceFlow`（可选）：`pageTitle`、`pageSubtitle`；`stages` 为三个对象，每项至少含 `id`（`order` | `fulfillment` | `afterSales`）、`title`、`summary`、`highlights`（字符串数组）。还可选填：
+
+| 字段 | 说明 |
+|------|------|
+| `functionScope` | 环节「功能边界」一句话，显示为流程条上的二级标题 |
+| `icons` | 字符串数组：每项为短 key（如 `cart`、`confirm`、`warehouse`、`truck`、`package`、`help`、`chat`、`star`），站内渲染为**单色**线框图标 |
+| `mockProjectLines` | 当该环节下**没有**带 `flowStage` 的真实项目时，流程条灰框内用 `[1]`、`[2]` 形式展示的占位行；一旦有真实项目，灰框改为展示与 `projectExperience` **顺序编号**一致的 `[n] 标题` |
+
+每个数组里的每一项（Project）通用字段如下：
 
 | 字段 | 必填 | 说明 |
 |------|------|------|
 | `title` | 是 | 作品标题 |
 | `description` | 是 | 简短描述 |
-| `href` | 是 | 外链以 `https://` 开头；站内建筑详情以 `/` 开头，如 `/projects/architecture/xxx` |
+| `href` | 是 | **建筑**：站内 `/projects/architecture/xxx`；**项目经历**：建议站内 `/projects/project-experience#p-{slug}`；其他作品可为外链 `https://` |
 | `tags` | 是 | 标签字符串数组，没有则写 `[]` |
 | `image` | 否 | 封面图 URL |
-| `slug` | 否 | 仅建筑详情用，与 `content/architecture/{slug}.md` 一致 |
+| `slug` | 否 | **建筑**：与 `content/architecture/{slug}.md` 一致；**项目经历**：用于锚点 id `p-{slug}`，与 `href` 中 hash 一致 |
+
+**项目经历（`projectExperience`）额外可选字段：**
+
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| `flowStage` | 建议填 | `order` 下单、`fulfillment` 履约、`afterSales` 售后，用于归入对应环节区块 |
+| `resultHighlight` | 否 | 一行关键结果，显示在流程页卡片上 |
+| `externalUrl` | 否 | 仓库等外链；**不要**把 GitHub 填进 `href`，否则卡片会整卡跳出站 |
+| `hidden` | 否 | 为 `true` 时首页与 `/projects/project-experience` 均不展示该条（JSON 可保留，之后改回 `false` 即恢复） |
 
 ---
 

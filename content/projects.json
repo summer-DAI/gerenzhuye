@@ -1,4 +1,57 @@
 {
+  "projectExperienceFlow": {
+    "pageTitle": "京东零售黄金流程交易方向·项目经历",
+    "pageSubtitle": "参与京东零售即时零售场景 C 端页面产品设计，主要负责订单、结算、履约等用户前台页面的体验优化与增长场景创新；能够结合用户反馈、页面漏斗与业务指标，定位体验问题并推进交互方案落地，提升用户决策效率、页面转化与履约感知。",
+    "stages": [
+      {
+        "id": "order",
+        "title": "下单阶段",
+        "functionScope": "用户选购、加购、优惠与结算感知、下单与支付前决策。",
+        "summary": "侧重转化、推荐与交易前体验；可结合 A/B 验证策略收益。",
+        "icons": ["cart", "confirm", "chart"],
+        "mockProjectLines": [
+          "结算页默认备注",
+          "结算页动线优化"
+        ],
+        "highlights": [
+          "结算页默认备注",
+          "结算页动线优化"
+        ]
+      },
+      {
+        "id": "fulfillment",
+        "title": "履约阶段",
+        "functionScope": "支付后订单流转、结算、履约进度与交付体验。",
+        "summary": "侧重链路通畅、信息透明与指标闭环。",
+        "icons": ["warehouse", "truck", "package"],
+        "mockProjectLines": [
+          "保温餐箱c端展示",
+          "催单体验优化",
+          "订单ai助手"
+        ],
+        "highlights": [
+          "保温餐箱 C 端展示",
+          "催单体验优化",
+          "订单 AI 助手"
+        ]
+      },
+      {
+        "id": "afterSales",
+        "title": "售后阶段",
+        "functionScope": "咨询、退款、客诉与体验修复，以及满意度与复访。",
+        "summary": "侧重降低退单成本、提升满意度与留存。",
+        "icons": ["help", "chat", "star"],
+        "mockProjectLines": [
+          "逆向交易链路优化",
+          "外卖挽单-取消险"
+        ],
+        "highlights": [
+          "逆向交易链路优化",
+          "外卖挽单与取消险"
+        ]
+      }
+    ]
+  },
   "vibeCoding": [
     {
       "title": "vibe coding：AI 文献管理助手",
@@ -82,14 +135,74 @@
   ],
   "projectExperience": [
     {
-      "title": "示例：交易链路体验优化（可替换）",
-      "description": "在实习中参与的项目示例：可写背景、你的角色、关键产出与指标。",
-      "href": "https://github.com/summer-dai",
-      "tags": [
-        "实习",
-        "产品"
-      ],
-      "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80"
+      "slug": "jd-settlement-default-remark",
+      "title": "结算页默认备注",
+      "description": "即时零售结算页：设计默认备注能力与展示策略，减少用户重复填写、缩短决策路径，兼顾合规与商家侧配置效率。",
+      "href": "/projects/project-experience#p-jd-settlement-default-remark",
+      "flowStage": "order",
+      "resultHighlight": "优化结算前沟通效率与下单转化（结合漏斗与业务指标迭代）",
+      "tags": ["下单", "结算"],
+      "image": "/project-experience/image2.png"
+    },
+    {
+      "slug": "jd-settlement-flow-optimization",
+      "title": "结算页动线优化",
+      "description": "梳理结算页关键动线与信息架构，针对优惠感知弱、步骤折损高等问题推进交互与文案方案落地，联动实验验证转化变化。",
+      "href": "/projects/project-experience#p-jd-settlement-flow-optimization",
+      "flowStage": "order",
+      "resultHighlight": "降低结算环节折损、提升页面转化与体验一致性",
+      "tags": ["下单", "动线"],
+      "image": "/project-experience/20260404131113004.png"
+    },
+    {
+      "slug": "jd-insulated-meal-box-c",
+      "title": "保温餐箱c端展示",
+      "description": "履约侧 C 端展示保温餐箱与配送保障信息，增强用户对时效与餐品温度的感知，配合履约节点优化详情与异常状态表达。",
+      "href": "/projects/project-experience#p-jd-insulated-meal-box-c",
+      "flowStage": "fulfillment",
+      "resultHighlight": "提升履约透明度与用户信任（配送/温控感知）",
+      "tags": ["履约", "C 端"],
+      "image": "/project-experience/image.png"
+    },
+    {
+      "slug": "jd-order-nudge-ux",
+      "title": "催单体验优化",
+      "description": "优化催单入口、进度反馈与触达节奏，平衡用户焦虑与骑手/站点压力，推动催单相关客诉与重复进线下降。",
+      "href": "/projects/project-experience#p-jd-order-nudge-ux",
+      "flowStage": "fulfillment",
+      "resultHighlight": "改善履约等待期体验与催单相关指标",
+      "tags": ["履约", "体验"],
+      "image": "/project-experience/20260404130841085.png"
+    },
+    {
+      "slug": "jd-order-ai-assistant",
+      "title": "订单 AI 助手",
+      "description": "探索订单场景下的 AI 助手能力：围绕订单状态查询、异常解释与下一步引导做对话与卡片形态设计，提升自助解决率。",
+      "href": "/projects/project-experience#p-jd-order-ai-assistant",
+      "flowStage": "fulfillment",
+      "resultHighlight": "提升订单问题自助闭环与履约咨询效率",
+      "tags": ["履约", "AI"],
+      "image": "/project-experience/image3.png"
+    },
+    {
+      "slug": "jd-reverse-trade-chain",
+      "title": "逆向交易链路优化",
+      "description": "梳理退款/退货等逆向链路的前台页面与状态机表达，减少用户反复进线，推动逆向环节时效与满意度指标改善。",
+      "href": "/projects/project-experience#p-jd-reverse-trade-chain",
+      "flowStage": "afterSales",
+      "resultHighlight": "逆向链路更清晰、退单与体验成本更可控",
+      "tags": ["售后", "逆向"],
+      "image": "/project-experience/7.png"
+    },
+    {
+      "slug": "jd-takeaway-retention-cancel-insurance",
+      "title": "外卖挽单-取消险",
+      "description": "外卖挽单与取消险相关增长与保障策略的前台表达，帮助用户在取消决策前理解权益与替代方案，降低无谓退单与资损。",
+      "href": "/projects/project-experience#p-jd-takeaway-retention-cancel-insurance",
+      "flowStage": "afterSales",
+      "resultHighlight": "挽单与险类场景下的转化与体验平衡",
+      "tags": ["售后", "增长"],
+      "image": "/project-experience/5.png"
     }
   ]
 }

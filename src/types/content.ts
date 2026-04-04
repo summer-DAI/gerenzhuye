@@ -22,6 +22,9 @@ export interface Profile {
   xiaohongshuUrl?: string;
 }
 
+/** 项目经历 · 电商黄金流程环节（仅用于 projectExperience） */
+export type TransactionFlowStage = "order" | "fulfillment" | "afterSales";
+
 export interface Project {
   title: string;
   description: string;
@@ -31,6 +34,36 @@ export interface Project {
   tags: string[];
   /** 建筑类二级页 slug，与 `content/architecture/{slug}.md` 及可选 `public/architecture/{slug}/` 对应 */
   slug?: string;
+  /** 仅 projectExperience：下单 / 履约 / 售后 */
+  flowStage?: TransactionFlowStage;
+  /** 可选：关键结果一行（流程页卡片展示） */
+  resultHighlight?: string;
+  /** 可选：仓库/文章等外链，不作为卡片主跳转 */
+  externalUrl?: string;
+  /** 仅 projectExperience：为 true 时在首页与流程页均不展示（数据可保留） */
+  hidden?: boolean;
+}
+
+export interface ProjectExperienceFlowStageDef {
+  id: TransactionFlowStage;
+  /** 一级：环节名称，如「下单阶段」 */
+  title: string;
+  /** 二级：一句话概括该环节功能边界（示意图中的功能标题行） */
+  functionScope?: string;
+  /** 补充说明，置于二级标题与项目灰框之间（可选） */
+  summary: string;
+  /** 可选要点；与灰框项目列表二选一展示时可留空 */
+  highlights: string[];
+  /** 顶部流程示意：短 key（如 cart、warehouse），渲染为单色 SVG */
+  icons?: string[];
+  /** 该环节暂无真实项目时，灰框内展示的模拟行（不含 [Pn] 前缀也可） */
+  mockProjectLines?: string[];
+}
+
+export interface ProjectExperienceFlowMeta {
+  pageTitle: string;
+  pageSubtitle: string;
+  stages: ProjectExperienceFlowStageDef[];
 }
 
 export interface ProjectsFile {
@@ -42,6 +75,8 @@ export interface ProjectsFileV2 {
   architecture: Project[];
   /** 与 vibe / 建筑同级的「项目经历」类作品（实习项目、课题等） */
   projectExperience: Project[];
+  /** 项目经历二级页：交易流程说明文案 */
+  projectExperienceFlow?: ProjectExperienceFlowMeta;
 }
 
 export type ExperienceKind = "education" | "internship" | "campus";

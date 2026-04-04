@@ -35,7 +35,7 @@ npm run dev
 |------|------|
 | `content/profile.json` | 姓名、头衔、简介、手机、邮箱、链接、小红书；可选 `greeting`、`badge`、`heroImage`、`brandLabel`（顶栏站点名） |
 | `content/experience.json` | 经历卡片：`kind` 为 `education`（教育）或 `internship`（实习）；含时间、机构、职位、要点，可选 `logo`、`href` |
-| `content/projects.json` | 作品列表（`vibeCoding` 与 `architecture` 两组） |
+| `content/projects.json` | 作品列表（`vibeCoding`、`architecture`、`projectExperience`）；`projectExperience` 对应 `/projects/project-experience` 交易流程页，见 CONTENT-GUIDE |
 | `content/knowledge.md` | 供「问我」使用的知识库（Markdown） |
 
 修改后保存即可在本地看到效果；部署到 Vercel 后推送仓库以触发重新构建。

@@ -6,15 +6,21 @@ import { ProjectGrid } from "@/components/ProjectGrid";
 import {
   loadExperience,
   loadProfile,
+  loadProjectExperienceFlowMeta,
   loadProjects,
+  visibleProjectExperience,
 } from "@/lib/content";
+import { worksListRoutes } from "@/lib/siteRoutes";
 
 const sectionLinkClass =
   "inline-flex w-fit items-center gap-1 rounded-full border-2 border-accent/40 bg-accent/10 px-4 py-2 text-sm font-bold text-accent transition hover:-translate-y-0.5 hover:border-accent hover:bg-accent/15 hover:shadow-chunky-sm";
 
 export default function HomePage() {
   const profile = loadProfile();
-  const { vibeCoding, architecture, projectExperience } = loadProjects();
+  const { vibeCoding, architecture, projectExperience: projectExperienceRaw } =
+    loadProjects();
+  const projectExperience = visibleProjectExperience(projectExperienceRaw);
+  const flowExperienceMeta = loadProjectExperienceFlowMeta();
   const { items } = loadExperience();
 
   return (
@@ -36,15 +42,29 @@ export default function HomePage() {
                 <h2 className="font-display text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
                   项目经历
                 </h2>
-                <p className="mt-2 text-muted">
-                  实习与课题等偏「项目产出」的展示。
-                </p>
+                <p className="mt-2 text-muted">实习工作产出</p>
               </div>
-              <Link href="/projects/project-experience" className={sectionLinkClass}>
+              <Link
+                href={worksListRoutes.projectExperience}
+                className={sectionLinkClass}
+              >
                 去看看 →
               </Link>
             </div>
-            <ProjectGrid projects={projectExperience} />
+            <Link
+              href={worksListRoutes.projectExperience}
+              className="group block overflow-hidden rounded-3xl border-2 border-border bg-card p-6 shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-chunky sm:p-8"
+            >
+              <p className="font-display text-lg font-bold text-foreground group-hover:text-accent sm:text-xl">
+                {flowExperienceMeta.pageTitle}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
+                {flowExperienceMeta.pageSubtitle}
+              </p>
+              <p className="mt-5 text-sm font-bold text-accent">
+                查看下单 · 履约 · 售后环节与项目详情 →
+              </p>
+            </Link>
           </div>
         </section>
       ) : null}
@@ -61,7 +81,7 @@ export default function HomePage() {
               </h2>
               <p className="mt-2 text-muted">产品与 AI 工具相关作品。</p>
             </div>
-            <Link href="/projects/vibe" className={sectionLinkClass}>
+            <Link href={worksListRoutes.vibeCoding} className={sectionLinkClass}>
               去看看 →
             </Link>
           </div>
@@ -80,10 +100,10 @@ export default function HomePage() {
                 建筑设计
               </h2>
               <p className="mt-2 text-muted">
-                建筑与空间设计作品；每个项目有独立详情页。
+                建筑与空间设计作品；每个项目都有站内详情页。
               </p>
             </div>
-            <Link href="/projects/architecture" className={sectionLinkClass}>
+            <Link href={worksListRoutes.architecture} className={sectionLinkClass}>
               去看看 →
             </Link>
           </div>

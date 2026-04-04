@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Nunito, Noto_Sans_SC } from "next/font/google";
 
 import { FloatingAskButton } from "@/components/FloatingAskButton";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { loadProfile, loadProjects } from "@/lib/content";
+import { loadProfile, loadProjects, visibleProjectExperience } from "@/lib/content";
 
 import "./globals.css";
 
@@ -34,7 +35,7 @@ export default function RootLayout({
 }>) {
   const profile = loadProfile();
   const siteBrand = profile.brandLabel ?? `${profile.name} · Portfolio`;
-  const { projectExperience } = loadProjects();
+  const projectExperience = visibleProjectExperience(loadProjects().projectExperience);
   const worksHref =
     projectExperience.length > 0 ? "/#project-experience" : "/#vibe";
 
@@ -49,6 +50,7 @@ export default function RootLayout({
           <SiteFooter />
         </div>
         <FloatingAskButton />
+        <Analytics />
       </body>
     </html>
   );

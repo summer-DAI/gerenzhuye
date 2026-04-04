@@ -5,7 +5,9 @@ import type {
   ExperienceFile,
   Profile,
   Project,
+  ProjectExperienceFlowMeta,
   ProjectsFileV2,
+  TransactionFlowStage,
 } from "@/types/content";
 
 const contentDir = path.join(process.cwd(), "content");
@@ -24,6 +26,69 @@ export function loadProjects(): ProjectsFileV2 {
     vibeCoding: data.vibeCoding ?? [],
     architecture: data.architecture ?? [],
     projectExperience: data.projectExperience ?? [],
+    projectExperienceFlow: data.projectExperienceFlow,
+  };
+}
+
+/** 过滤 `hidden: true` 的项目经历（首页与流程页展示用） */
+export function visibleProjectExperience(projects: Project[]): Project[] {
+  return projects.filter((p) => !p.hidden);
+}
+
+/** 按环节分组；未标 flowStage 的条目不会出现在任一组 */
+export function groupProjectExperienceByFlowStage(
+  projects: Project[]
+): Record<TransactionFlowStage, Project[]> {
+  const out: Record<TransactionFlowStage, Project[]> = {
+    order: [],
+    fulfillment: [],
+    afterSales: [],
+  };
+  for (const p of projects) {
+    const s = p.flowStage;
+    if (s === "order" || s === "fulfillment" || s === "afterSales") {
+      out[s].push(p);
+    }
+  }
+  return out;
+}
+
+export function loadProjectExperienceFlowMeta(): ProjectExperienceFlowMeta {
+  const flow = loadProjects().projectExperienceFlow;
+  if (flow?.stages?.length) return flow;
+  return {
+    pageTitle: "京东零售黄金流程交易方向·项目经历",
+    pageSubtitle:
+      "按电商黄金流程（下单 → 履约 → 售后）组织实习中的产出。请在 content/projects.json 中配置 projectExperienceFlow。",
+    stages: [
+      {
+        id: "order",
+        title: "下单阶段",
+        functionScope: "",
+        summary: "",
+        highlights: [],
+        icons: [],
+        mockProjectLines: [],
+      },
+      {
+        id: "fulfillment",
+        title: "履约阶段",
+        functionScope: "",
+        summary: "",
+        highlights: [],
+        icons: [],
+        mockProjectLines: [],
+      },
+      {
+        id: "afterSales",
+        title: "售后阶段",
+        functionScope: "",
+        summary: "",
+        highlights: [],
+        icons: [],
+        mockProjectLines: [],
+      },
+    ],
   };
 }
 

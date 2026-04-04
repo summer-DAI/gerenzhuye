@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { worksListRoutes } from "@/lib/siteRoutes";
 import type { Profile } from "@/types/content";
 
 function normalizeXhsHandle(raw: string): string {
@@ -107,7 +108,7 @@ export function Hero({
               经历
             </Link>
             {showProjectExperienceLink ? (
-              <Link href="/projects/project-experience" className={primaryCtaClass}>
+              <Link href={worksListRoutes.projectExperience} className={primaryCtaClass}>
                 <span aria-hidden>▦</span>
                 项目经历
                 <span aria-hidden className="ml-1">
@@ -115,14 +116,14 @@ export function Hero({
                 </span>
               </Link>
             ) : null}
-            <Link href="/projects/vibe" className={primaryCtaClass}>
+            <Link href={worksListRoutes.vibeCoding} className={primaryCtaClass}>
               <span aria-hidden>{"</>"}</span>
               vibe coding作品
               <span aria-hidden className="ml-1">
                 →
               </span>
             </Link>
-            <Link href="/projects/architecture" className={primaryCtaClass}>
+            <Link href={worksListRoutes.architecture} className={primaryCtaClass}>
               <span aria-hidden>▦</span>
               建筑设计作品
               <span aria-hidden className="ml-1">
