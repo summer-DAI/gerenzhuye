@@ -31,6 +31,8 @@ export interface Project {
   /** 站内路径以 `/` 开头（如 `/projects/architecture/xxx`）时用 Next Link；外链用 https */
   href: string;
   image?: string;
+  /** 可选额外配图 URL（主图仍为 `image`；用于项目经历小卡片多张设计稿） */
+  extraImages?: string[];
   tags: string[];
   /** 建筑类二级页 slug，与 `content/architecture/{slug}.md` 及可选 `public/architecture/{slug}/` 对应 */
   slug?: string;

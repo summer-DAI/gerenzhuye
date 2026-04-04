@@ -103,6 +103,7 @@
 |------|------|------|
 | `flowStage` | 建议填 | `order` 下单、`fulfillment` 履约、`afterSales` 售后，用于归入对应环节区块 |
 | `resultHighlight` | 否 | 一行关键结果，显示在流程页卡片上 |
+| `extraImages` | 否 | 字符串数组：在 `image` 主图下方额外展示的图片（如第二张设计稿），仅流程页小卡片使用 |
 | `externalUrl` | 否 | 仓库等外链；**不要**把 GitHub 填进 `href`，否则卡片会整卡跳出站 |
 | `hidden` | 否 | 为 `true` 时首页与 `/projects/project-experience` 均不展示该条（JSON 可保留，之后改回 `false` 即恢复） |
 

@@ -27,11 +27,13 @@
         "mockProjectLines": [
           "保温餐箱c端展示",
           "催单体验优化",
+          "AI一键点外卖",
           "订单ai助手"
         ],
         "highlights": [
           "保温餐箱 C 端展示",
           "催单体验优化",
+          "AI一键点外卖",
           "订单 AI 助手"
         ]
       },
@@ -172,7 +174,19 @@
       "flowStage": "fulfillment",
       "resultHighlight": "改善履约等待期体验与催单相关指标",
       "tags": ["履约", "体验"],
-      "image": "/project-experience/20260404130841085.png"
+      "image": "/project-experience/20260404130841085.png",
+      "extraImages": ["/project-experience/20260404145037_161_199.png"]
+    },
+    {
+      "slug": "jd-ai-one-click-takeaway",
+      "title": "AI一键点外卖",
+      "description": "探索即时零售场景下语音与对话驱动的点餐体验：将 AI 能力从「问答工具」升级为可执行下单、改址、加购等动作的代理能力，缩短决策路径并降低履约前折损。",
+      "href": "/projects/project-experience#p-jd-ai-one-click-takeaway",
+      "flowStage": "fulfillment",
+      "resultHighlight": "推动 AI 在订单场景的代理化落地与体验验证",
+      "tags": ["履约", "AI"],
+      "image": "/project-experience/4.png",
+      "extraImages": ["/project-experience/image3.png"]
     },
     {
       "slug": "jd-order-ai-assistant",
@@ -182,7 +196,7 @@
       "flowStage": "fulfillment",
       "resultHighlight": "提升订单问题自助闭环与履约咨询效率",
       "tags": ["履约", "AI"],
-      "image": "/project-experience/image3.png"
+      "image": "/project-experience/20260404130710555.png"
     },
     {
       "slug": "jd-reverse-trade-chain",

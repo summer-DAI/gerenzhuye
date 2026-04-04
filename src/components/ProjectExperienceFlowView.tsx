@@ -62,9 +62,18 @@ function FlowStageMiniCard({ project }: { project: Project }) {
           {textBlock}
         </a>
       )}
-      {project.image ? (
-        <div className="px-4 pb-4">
-          <ProjectImageLightbox src={project.image} alt={project.title} />
+      {project.image || project.extraImages?.length ? (
+        <div className="space-y-3 px-4 pb-4">
+          {project.image ? (
+            <ProjectImageLightbox src={project.image} alt={project.title} />
+          ) : null}
+          {project.extraImages?.map((src, i) => (
+            <ProjectImageLightbox
+              key={`${projectStableKey(project)}-extra-${i}`}
+              src={src}
+              alt={`${project.title}（图 ${i + 2}）`}
+            />
+          ))}
         </div>
       ) : null}
     </article>
