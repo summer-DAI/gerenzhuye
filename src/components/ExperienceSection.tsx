@@ -125,7 +125,7 @@ export function ExperienceSection({ items }: { items: ExperienceItem[] }) {
                             {item.organization}
                           </h3>
                           <p className="mt-0.5 text-sm font-semibold text-foreground/90">
-                            {item.role}
+                            {item.roleDisplay ?? item.role}
                           </p>
                         </div>
                       </div>
@@ -138,14 +138,16 @@ export function ExperienceSection({ items }: { items: ExperienceItem[] }) {
                       </span>
                     </div>
 
-                    <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted">
-                      {item.bullets.map((b, j) => (
-                        <li key={j} className="flex gap-2">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" />
-                          <span>{b}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {!item.hideBullets && item.bullets.length > 0 ? (
+                      <ul className="mt-4 space-y-2 text-sm leading-relaxed text-muted">
+                        {item.bullets.map((b, j) => (
+                          <li key={j} className="flex gap-2">
+                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
 
                     {item.href ? (
                       <Link

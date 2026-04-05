@@ -88,7 +88,11 @@ export interface ExperienceItem {
   dateRange: string;
   organization: string;
   role: string;
+  /** 若设置，经历卡片职位行优先显示此文案（可与 `role` 并存以保留完整原文） */
+  roleDisplay?: string;
   bullets: string[];
+  /** 为 true 时不渲染要点列表（文案可保留在 bullets 内便于日后恢复） */
+  hideBullets?: boolean;
   logo?: string;
   href?: string;
 }

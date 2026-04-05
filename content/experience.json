@@ -36,6 +36,8 @@
       "dateRange": "2024.06 – 2024.08",
       "organization": "抖音 · 本地生活",
       "role": "推荐策略产品实习生",
+      "roleDisplay": "产品实习生",
+      "hideBullets": true,
       "bullets": [
         "引入 User-CF、Item-CF、UtoU、ItoU 等深度学习模型，提升推荐准确性与多样性",
         "搭建用户-物品-行为数据体系，推进模型上线与 A/B 实验",
