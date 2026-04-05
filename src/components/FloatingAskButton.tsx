@@ -66,7 +66,7 @@ export function FloatingAskButton() {
         />
         <span className="relative font-display text-lg font-extrabold">AI</span>
 
-        <span className="pointer-events-none absolute right-[calc(100%+12px)] top-1/2 hidden -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-2xl border-2 border-border bg-background/95 px-3 py-2 text-sm font-bold text-foreground shadow-chunky-sm backdrop-blur-md group-hover:flex">
+        <span className="pointer-events-none absolute right-[calc(100%+12px)] top-1/2 hidden -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-2xl border-2 border-border bg-background px-3 py-2 text-sm font-bold text-foreground shadow-chunky-sm group-hover:flex">
           <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent/15 text-xs font-bold text-accent">
             ?
           </span>
@@ -75,7 +75,7 @@ export function FloatingAskButton() {
       </MotionLink>
 
       {showHint ? (
-        <div className="absolute bottom-16 right-0 w-[260px] rounded-3xl border-2 border-border bg-background/98 p-3 text-sm text-foreground shadow-chunky backdrop-blur-md">
+        <div className="absolute bottom-16 right-0 w-[260px] rounded-3xl border-2 border-border bg-background p-3 text-sm text-foreground shadow-chunky">
           <div className="flex items-start justify-between gap-2">
             <div className="font-bold">可以问我任何问题</div>
             <button
@@ -93,7 +93,7 @@ export function FloatingAskButton() {
           </div>
           <div
             aria-hidden
-            className="absolute -bottom-2 right-6 h-4 w-4 rotate-45 border-b-2 border-r-2 border-border bg-background/98"
+            className="absolute -bottom-2 right-6 h-4 w-4 rotate-45 border-b-2 border-r-2 border-border bg-background"
           />
         </div>
       ) : null}

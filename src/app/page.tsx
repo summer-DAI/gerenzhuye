@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { Hero } from "@/components/Hero";
+import { ProjectExperienceHomePreview } from "@/components/ProjectExperienceHomePreview";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import {
   loadExperience,
@@ -15,11 +16,17 @@ import { worksListRoutes } from "@/lib/siteRoutes";
 const sectionLinkClass =
   "inline-flex w-fit items-center gap-1 rounded-full border-2 border-accent/40 bg-accent/10 px-4 py-2 text-sm font-bold text-accent transition hover:-translate-y-0.5 hover:border-accent hover:bg-accent/15 hover:shadow-chunky-sm";
 
+const HOME_PROJECT_EXPERIENCE_PREVIEW = 5;
+
 export default function HomePage() {
   const profile = loadProfile();
   const { vibeCoding, architecture, projectExperience: projectExperienceRaw } =
     loadProjects();
   const projectExperience = visibleProjectExperience(projectExperienceRaw);
+  const projectExperiencePreview = projectExperience.slice(
+    0,
+    HOME_PROJECT_EXPERIENCE_PREVIEW
+  );
   const flowExperienceMeta = loadProjectExperienceFlowMeta();
   const { items } = loadExperience();
 
@@ -64,6 +71,7 @@ export default function HomePage() {
               <p className="mt-5 text-sm font-bold text-accent">
                 查看下单 · 履约 · 售后环节与项目详情 →
               </p>
+              <ProjectExperienceHomePreview projects={projectExperiencePreview} />
             </Link>
           </div>
         </section>

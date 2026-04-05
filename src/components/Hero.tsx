@@ -38,7 +38,7 @@ export function Hero({
   return (
     <section className="px-4 py-10 sm:px-6 sm:py-14 lg:py-16">
       <div
-        className={`mx-auto max-w-6xl overflow-hidden rounded-5xl border-2 border-border bg-card/80 p-6 shadow-chunky backdrop-blur-sm sm:p-10 lg:p-12 ${hasImage ? "lg:grid lg:grid-cols-2 lg:items-center lg:gap-14" : ""}`}
+        className={`mx-auto max-w-6xl overflow-hidden rounded-5xl border-2 border-border bg-card p-6 shadow-chunky sm:p-10 lg:p-12 ${hasImage ? "lg:grid lg:grid-cols-2 lg:items-center lg:gap-14" : ""}`}
       >
         <div className="order-2 lg:order-1">
           <p className="text-sm font-semibold tracking-wide text-muted sm:text-base">

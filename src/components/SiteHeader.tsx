@@ -42,17 +42,21 @@ export function SiteHeader({
   const [activeKey, setActiveKey] = useState<ActiveKey>("home");
 
   useEffect(() => {
+    const applyNav = (next: ActiveKey) => {
+      setActiveKey((prev) => (prev === next ? prev : next));
+    };
+
     const syncHash = () => {
       const h = typeof window !== "undefined" ? window.location.hash : "";
       if (pathname === "/") {
-        if (h === "#experience") setActiveKey("experience");
+        if (h === "#experience") applyNav("experience");
         else if (
           h === "#vibe" ||
           h === "#architecture" ||
           h === "#project-experience"
         ) {
-          setActiveKey("projects");
-        } else setActiveKey("home");
+          applyNav("projects");
+        } else applyNav("home");
       }
     };
 
@@ -67,31 +71,39 @@ export function SiteHeader({
 
       if (elements.length === 0) return () => {};
 
+      let raf = 0;
       const io = new IntersectionObserver(
         (entries) => {
-          const visible = entries
-            .filter((e) => e.isIntersecting)
-            .sort(
-              (a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0)
-            )[0];
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            const visible = entries
+              .filter((e) => e.isIntersecting)
+              .sort(
+                (a, b) =>
+                  (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0)
+              )[0];
 
-          const id = visible?.target?.id;
-          if (id === "experience") setActiveKey("experience");
-          else if (
-            id === "vibe" ||
-            id === "architecture" ||
-            id === "project-experience"
-          ) {
-            setActiveKey("projects");
-          } else {
-            if (window.scrollY < 200) setActiveKey("home");
-          }
+            const id = visible?.target?.id;
+            if (id === "experience") applyNav("experience");
+            else if (
+              id === "vibe" ||
+              id === "architecture" ||
+              id === "project-experience"
+            ) {
+              applyNav("projects");
+            } else if (window.scrollY < 200) {
+              applyNav("home");
+            }
+          });
         },
         { root: null, threshold: [0.2, 0.35, 0.5] }
       );
 
       elements.forEach((el) => io.observe(el));
-      return () => io.disconnect();
+      return () => {
+        cancelAnimationFrame(raf);
+        io.disconnect();
+      };
     };
 
     syncHash();
@@ -106,7 +118,7 @@ export function SiteHeader({
   }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 border-b-2 border-border/80 bg-background/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b-2 border-border/80 bg-background/95">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:h-16 sm:px-6">
         <Link
           href="/"

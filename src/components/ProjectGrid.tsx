@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
 
-import { ProjectImageLightbox } from "@/components/ProjectImageLightbox";
 import type { Project } from "@/types/content";
 
 export function ProjectGrid({ projects }: { projects: Project[] }) {
@@ -43,33 +43,39 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
           </div>
         );
 
+        const imageBlock =
+          project.image ? (
+            <div className="relative aspect-[16/9] w-full overflow-hidden bg-border/30">
+              <Image
+                src={project.image}
+                alt=""
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 576px"
+                quality={75}
+                unoptimized={project.image.startsWith("data:")}
+              />
+            </div>
+          ) : null;
+
         return (
           <li key={key}>
-            <div className={`${shellClass}`}>
-              {project.image ? (
-                <div className="overflow-hidden rounded-t-3xl bg-border/30">
-                  <ProjectImageLightbox
-                    src={project.image}
-                    alt={project.title}
-                    className="rounded-none"
-                  />
-                </div>
-              ) : null}
-              {internal ? (
-                <Link href={project.href} className="flex flex-1 flex-col">
-                  {textBlock}
-                </Link>
-              ) : (
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-1 flex-col"
-                >
-                  {textBlock}
-                </a>
-              )}
-            </div>
+            {internal ? (
+              <Link href={project.href} className={`${shellClass} block`}>
+                {imageBlock}
+                {textBlock}
+              </Link>
+            ) : (
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${shellClass} block`}
+              >
+                {imageBlock}
+                {textBlock}
+              </a>
+            )}
           </li>
         );
       })}
