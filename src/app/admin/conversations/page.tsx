@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { adminLogout } from "@/app/admin/login/actions";
 import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
+import { AdminBadCaseSelector } from "@/components/AdminBadCaseSelector";
 
 export const dynamic = "force-dynamic";
 
@@ -72,6 +73,17 @@ export default async function AdminConversationsPage() {
           读取 Supabase 失败：{errorMessage}
         </div>
       ) : null}
+
+      <div className="mt-6 flex flex-wrap gap-2">
+        <Link
+          href="/admin/bad-cases"
+          className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+        >
+          → Bad cases
+        </Link>
+      </div>
+
+      <AdminBadCaseSelector conversations={conversations} />
 
       <div className="mt-8 overflow-hidden rounded-3xl border-2 border-border bg-card shadow-chunky-sm">
         <ul className="divide-y divide-border/70">

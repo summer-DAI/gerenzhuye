@@ -8,6 +8,7 @@ export const dynamic = "force-dynamic";
 type ConversationRow = { id: string; title: string | null; updated_at: string };
 type EvalRunRow = { id: string; created_at: string; prompt_version: string; target_model: string };
 type IterRow = { id: string; updated_at: string; status: string; title: string };
+type BadCaseRow = { id: string; created_at: string; status: string };
 
 function fmt(ts: string) {
   const d = new Date(ts);
@@ -20,10 +21,11 @@ export default async function AdminHomePage() {
   let conversations: ConversationRow[] = [];
   let runs: EvalRunRow[] = [];
   let iterations: IterRow[] = [];
+  let badCases: BadCaseRow[] = [];
 
   try {
     const supabase = getSupabaseAdmin();
-    const [c1, c2, c3] = await Promise.all([
+    const [c1, c2, c3, c4] = await Promise.all([
       supabase
         .from("conversations")
         .select("id,title,updated_at")
@@ -39,13 +41,20 @@ export default async function AdminHomePage() {
         .select("id,updated_at,status,title")
         .order("updated_at", { ascending: false })
         .limit(3),
+      supabase
+        .from("bad_cases")
+        .select("id,created_at,status")
+        .order("created_at", { ascending: false })
+        .limit(3),
     ]);
     if (c1.error) errorMessage = c1.error.message;
     if (c2.error) errorMessage = errorMessage ?? c2.error.message;
     if (c3.error) errorMessage = errorMessage ?? c3.error.message;
+    if (c4.error) errorMessage = errorMessage ?? c4.error.message;
     conversations = (c1.data ?? []) as ConversationRow[];
     runs = (c2.data ?? []) as EvalRunRow[];
     iterations = (c3.data ?? []) as IterRow[];
+    badCases = (c4.data ?? []) as BadCaseRow[];
   } catch (err) {
     errorMessage = err instanceof Error ? err.message : "读取 Supabase 失败";
   }
@@ -121,6 +130,20 @@ export default async function AdminHomePage() {
             迭代清单
           </div>
           <div className="mt-2 text-sm text-muted">记录每次 prompt 改动与指标变化。</div>
+        </Link>
+      </div>
+
+      <div className="mt-4">
+        <Link
+          href="/admin/bad-cases"
+          className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-4 py-2 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+        >
+          → Bad cases（回流池）
+          {badCases.length ? (
+            <span className="ml-1 rounded-full bg-border/50 px-2 py-0.5 text-xs font-extrabold text-foreground">
+              {badCases.filter((b) => b.status === "open").length} open
+            </span>
+          ) : null}
         </Link>
       </div>
 
