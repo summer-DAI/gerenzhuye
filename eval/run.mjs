@@ -3,6 +3,7 @@ import path from "path";
 import crypto from "crypto";
 import { fileURLToPath } from "url";
 
+import dotenv from "dotenv";
 import OpenAI from "openai";
 import { createClient } from "@supabase/supabase-js";
 
@@ -12,6 +13,9 @@ import { buildJudgeMessages } from "./judgePrompt.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
+
+// Load local env (Next.js loads this automatically, but plain Node does not).
+dotenv.config({ path: path.join(repoRoot, ".env.local") });
 
 function readText(rel) {
   return fs.readFileSync(path.join(repoRoot, rel), "utf-8");
