@@ -5,9 +5,9 @@ import { adminLogin } from "./actions";
 export default async function AdminLoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string; error?: string }>;
+  searchParams?: Promise<{ next?: string; error?: string }>;
 }) {
-  const sp = await searchParams;
+  const sp = (await searchParams) ?? {};
   const next = sp.next || "/admin/conversations";
   const error = sp.error || "";
 
