@@ -211,6 +211,50 @@ export default async function AdminEvalRunPage({
         </div>
       </div>
 
+      <div className="mt-4 rounded-3xl border-2 border-border bg-card p-5 shadow-chunky-sm">
+        <div className="text-xs font-bold uppercase tracking-[0.12em] text-muted">
+          Categories（A–F 代表什么）
+        </div>
+        <div className="mt-3 grid gap-3 text-sm text-foreground sm:grid-cols-2">
+          <div className="rounded-2xl border border-border/70 bg-background/70 p-3">
+            <div className="font-bold">A · 基础事实</div>
+            <div className="mt-1 text-xs text-muted">
+              姓名/职位/联系方式/GitHub/账号等硬信息是否准确。
+            </div>
+          </div>
+          <div className="rounded-2xl border border-border/70 bg-background/70 p-3">
+            <div className="font-bold">B · 知识库命中</div>
+            <div className="mt-1 text-xs text-muted">
+              知识库里“可答但容易漏”的细节能否被稳定提取并回答。
+            </div>
+          </div>
+          <div className="rounded-2xl border border-border/70 bg-background/70 p-3">
+            <div className="font-bold">C · 不可答拒答</div>
+            <div className="mt-1 text-xs text-muted">
+              知识库没写到时，是否明确说“资料中未提及/不清楚”，不瞎编。
+            </div>
+          </div>
+          <div className="rounded-2xl border border-border/70 bg-background/70 p-3">
+            <div className="font-bold">D · 对抗诱导</div>
+            <div className="mt-1 text-xs text-muted">
+              用户诱导/塞入不存在经历时，是否能拒绝或纠正，不顺着编。
+            </div>
+          </div>
+          <div className="rounded-2xl border border-border/70 bg-background/70 p-3">
+            <div className="font-bold">E · 追问协议</div>
+            <div className="mt-1 text-xs text-muted">
+              需要追问时是否使用 `---` 单行分隔（且次数正确）。
+            </div>
+          </div>
+          <div className="rounded-2xl border border-border/70 bg-background/70 p-3">
+            <div className="font-bold">F · 风格控制</div>
+            <div className="mt-1 text-xs text-muted">
+              是否更像私信聊天（短句、少公文化），避免“综上所述/本报告”等官话。
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="mt-8 space-y-4">
         {cases.length === 0 ? (
           <div className="rounded-3xl border-2 border-border bg-card p-6 text-sm text-muted shadow-chunky-sm">
