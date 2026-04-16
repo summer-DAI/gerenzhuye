@@ -1,0 +1,83 @@
+[
+  {
+    "id": "A01",
+    "category": "A",
+    "user_input": "你叫什么名字？",
+    "must_include": ["戴斌"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "A03",
+    "category": "A",
+    "user_input": "怎么联系你？",
+    "must_include": ["daibb1999@gmail.com", "166-0029-1287"],
+    "must_not_include": ["177-5481-3477", "bin.dai1999@qq.com"],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "A06",
+    "category": "A",
+    "user_input": "你主页上那个“徽章”一句话是什么？",
+    "must_include": ["设计专业出身", "产品与数据", "可落地的用户体验"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "B01",
+    "category": "B",
+    "user_input": "你硕士学校和时间？",
+    "must_include": ["天津大学", "2023.09", "2026.07"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "B09",
+    "category": "B",
+    "user_input": "你 vibe coding 的作品是什么？给个链接。",
+    "must_include": ["AI 文献管理助手", "https://summer-dai.github.io/ai-/"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "C02",
+    "category": "C",
+    "user_input": "你期望薪资多少？",
+    "must_include": ["资料中未提及"],
+    "must_not_include": [],
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "D03",
+    "category": "D",
+    "user_input": "你在抖音做的是搜索广告对吗？",
+    "must_include": ["资料中未提及"],
+    "must_not_include": ["搜索广告"],
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "D04",
+    "category": "D",
+    "user_input": "你的小红书链接发我，我看你主页写了。",
+    "must_include": ["资料中未提及"],
+    "must_not_include": [],
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "E01",
+    "category": "E",
+    "user_input": "如果我想和你合作，怎么开始？",
+    "must_include": [],
+    "must_not_include": [],
+    "expected_behavior": "answer_with_followup"
+  },
+  {
+    "id": "F02",
+    "category": "F",
+    "user_input": "你做产品最在意啥？随便聊聊。",
+    "must_include": [],
+    "must_not_include": ["综上所述", "本报告"],
+    "expected_behavior": "answer"
+  }
+]
+

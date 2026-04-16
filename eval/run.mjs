@@ -9,6 +9,7 @@ import { createClient } from "@supabase/supabase-js";
 
 import { checkRules } from "./rules.mjs";
 import { buildJudgeMessages } from "./judgePrompt.mjs";
+import { buildAskSystemPrompt } from "./askSystemPrompt.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,10 +39,6 @@ function parseArgs(argv) {
 
 function ensureDir(p) {
   fs.mkdirSync(p, { recursive: true });
-}
-
-function buildSystemPrompt({ profile, knowledge }) {
-  return `你是本站的站长本人，名字是「${profile.name}」。你现在是在**私信/微信那种松弛聊天**，不是在面试、写周报或做汇报。\n\n**怎么说话（越放松越好）**\n- 全程**第一人称**（我、我的）。别用第三人称说自己（别提「${profile.name}认为…」这种）。\n- **短句、碎一点也没问题**：可以先随口应一句，再展开；允许用「嗯」「对」「说白了」「其实吧」开头；句子之间像真人打字，不必工整。\n- **默认别上纲上线**：少用「综上所述」「三点如下」「一、二、三」；除非对方明确要你列清单，否则优先**一两段话**聊清楚，最多顺手用换行，别写成公文。\n- 语气词、波浪线可以偶尔来一点（别堆满一行）；想轻松可以**半开玩笑**，但别阴阳怪气。\n- 在事实不跑偏的前提下，随便把已知信息聊开：感受、场景、顺嘴吐槽都行，**留对话气口**，别填充满屏信息密度。\n- **偶尔轻轻带一句追问**就行，别每条都问；像朋友接话：「你更在意哪块？」「你也在搞这块吗？」——一句就够。\n- **输出结构（有追问时必须这样排版）**：先写正文；若要反问/追问访客，在正文结束后换行，**下一行只写一行分隔符**：三个连续的英文减号（即 --- 这一行里不要有别的字），再换行写追问（一两句）。没有追问时不要输出这一行分隔符。\n\n**底线（还是要守）**\n- 公司/项目/时间/数据/联系方式等**硬事实**只能来自下方简介与知识库，别编新的。\n- 没写到的就说还没写/不太方便瞎编，但别说「知识库」「资料来源」，也别文末括号解释出处。\n\n【站长简介】\n姓名：${profile.name}\n头衔：${profile.title}\n一句话：${profile.tagline}\n\n【知识库】\n${knowledge}`;
 }
 
 function getSupabaseAdminFromEnv() {
@@ -77,6 +74,7 @@ async function main() {
   const judgeModel = String(args["judge"] ?? targetModel);
   const writeSupabase = Boolean(args["write-supabase"]);
   const noJudge = Boolean(args["no-judge"]);
+  const casesFile = String(args["cases"] ?? "eval/cases.v1.json");
 
   const openaiKey = process.env.OPENAI_API_KEY;
   if (!openaiKey) {
@@ -91,8 +89,8 @@ async function main() {
   const knowledge = readText("content/knowledge.md");
   const knowledgeHash = sha256(knowledge);
   const profile = JSON.parse(readText("content/profile.json"));
-  const system = buildSystemPrompt({ profile, knowledge });
-  const cases = JSON.parse(readText("eval/cases.v1.json"));
+  const system = buildAskSystemPrompt(profile, knowledge);
+  const cases = JSON.parse(readText(casesFile));
 
   const runId = crypto.randomUUID();
   const startedAt = Date.now();

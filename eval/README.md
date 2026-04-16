@@ -48,3 +48,22 @@ Add notes:
 node eval/run.mjs --prompt-version=v1 --notes=\"tweak refusal wording\" --write-supabase
 ```
 
+### Smoke vs full runs
+
+The runner also supports a `--cases` flag so you can run a **small smoke set** before running the full suite:
+
+- Default cases file: `eval/cases.v1.json`
+- Optional smoke set: `eval/cases.smoke.json` (10 high‑signal cases)
+
+Example smoke run (rules + judge, write to Supabase):
+
+```bash
+node eval/run.mjs --prompt-version=ask-v2.4 --cases=eval/cases.smoke.json --write-supabase
+```
+
+Then run the full 30‑case suite for the same prompt version:
+
+```bash
+node eval/run.mjs --prompt-version=ask-v2.4 --write-supabase
+```
+
