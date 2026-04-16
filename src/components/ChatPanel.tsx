@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type Role = "user" | "assistant";
 
@@ -49,6 +49,7 @@ const bubbleAssistant =
 
 export function ChatPanel() {
   const reduceMotion = useReducedMotion();
+  const [conversationId, setConversationId] = useState<string>("");
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<{ role: Role; content: string }[]>(
     []
@@ -59,6 +60,22 @@ export function ChatPanel() {
   const abortRef = useRef<AbortController | null>(null);
   const lastUserTextRef = useRef<string>("");
   const lastUserMessagesRef = useRef<{ role: Role; content: string }[]>([]);
+
+  useEffect(() => {
+    const storageKey = "conversation_id";
+    try {
+      const raw = window.localStorage.getItem(storageKey);
+      if (raw && raw.trim()) {
+        setConversationId(raw);
+        return;
+      }
+      const id = crypto.randomUUID();
+      window.localStorage.setItem(storageKey, id);
+      setConversationId(id);
+    } catch {
+      setConversationId(crypto.randomUUID());
+    }
+  }, []);
 
   const scrollToBottom = useCallback(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -76,7 +93,7 @@ export function ChatPanel() {
   const sendText = useCallback(
     async (rawText: string) => {
       const text = rawText.trim();
-      if (!text || loading) return;
+      if (!text || loading || !conversationId) return;
 
       setError(null);
       setInput("");
@@ -97,7 +114,7 @@ export function ChatPanel() {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: nextMessages }),
+          body: JSON.stringify({ conversationId, messages: nextMessages }),
           signal: controller.signal,
         });
 
@@ -141,7 +158,7 @@ export function ChatPanel() {
         abortRef.current = null;
       }
     },
-    [friendlyError, loading, messages, scrollToBottom]
+    [conversationId, friendlyError, loading, messages, scrollToBottom]
   );
 
   const send = async () => {
@@ -153,6 +170,15 @@ export function ChatPanel() {
     setMessages([]);
     setError(null);
     setInput("");
+
+    const storageKey = "conversation_id";
+    const id = crypto.randomUUID();
+    try {
+      window.localStorage.setItem(storageKey, id);
+    } catch {
+      // ignore
+    }
+    setConversationId(id);
   };
 
   const stop = () => {

@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { createClient } from "@supabase/supabase-js";
 
 import { loadKnowledgeText, loadProfile } from "@/lib/content";
 
@@ -29,12 +30,19 @@ export async function POST(req: Request) {
   if (
     typeof body !== "object" ||
     body === null ||
+    !("conversationId" in body) ||
+    typeof (body as { conversationId?: unknown }).conversationId !== "string" ||
+    !(body as { conversationId: string }).conversationId.trim() ||
     !("messages" in body) ||
     !Array.isArray((body as { messages: unknown }).messages)
   ) {
-    return Response.json({ error: "缺少 messages 数组" }, { status: 400 });
+    return Response.json(
+      { error: "缺少 conversationId 或 messages 数组" },
+      { status: 400 }
+    );
   }
 
+  const conversationId = (body as { conversationId: string }).conversationId.trim();
   const rawMessages = (body as { messages: { role?: string; content?: string }[] })
     .messages;
 
@@ -95,6 +103,42 @@ ${knowledge}`;
   const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
 
   try {
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const supabase =
+      supabaseUrl && supabaseServiceKey
+        ? createClient(supabaseUrl, supabaseServiceKey, {
+            auth: { persistSession: false, autoRefreshToken: false },
+          })
+        : null;
+
+    const firstUser = messages[0];
+    const title =
+      messages.length === 1 && firstUser?.role === "user"
+        ? firstUser.content.trim().slice(0, 20)
+        : null;
+
+    // Persist the latest user message (best-effort).
+    const last = messages[messages.length - 1];
+    if (supabase && last?.role === "user") {
+      await supabase.from("conversations").upsert({
+        id: conversationId,
+        ...(title ? { title } : {}),
+      });
+
+      await supabase.from("conversation_messages").upsert({
+        conversation_id: conversationId,
+        idx: messages.length - 1,
+        role: "user",
+        content: last.content,
+      });
+
+      await supabase
+        .from("conversations")
+        .update({ updated_at: new Date().toISOString() })
+        .eq("id", conversationId);
+    }
+
     const completion = await openai.chat.completions.create({
       model,
       messages: [{ role: "system", content: system }, ...messages],
@@ -104,14 +148,34 @@ ${knowledge}`;
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       async start(controller) {
+        let assistantText = "";
         try {
           for await (const chunk of completion) {
             const text = chunk.choices[0]?.delta?.content ?? "";
-            if (text) controller.enqueue(encoder.encode(text));
+            if (!text) continue;
+            assistantText += text;
+            controller.enqueue(encoder.encode(text));
           }
         } catch (err) {
           controller.error(err);
           return;
+        }
+        if (supabase && assistantText) {
+          try {
+            await supabase.from("conversations").upsert({ id: conversationId });
+            await supabase.from("conversation_messages").upsert({
+              conversation_id: conversationId,
+              idx: messages.length,
+              role: "assistant",
+              content: assistantText,
+            });
+            await supabase
+              .from("conversations")
+              .update({ updated_at: new Date().toISOString() })
+              .eq("id", conversationId);
+          } catch {
+            // best-effort; ignore logging failures
+          }
         }
         controller.close();
       },
