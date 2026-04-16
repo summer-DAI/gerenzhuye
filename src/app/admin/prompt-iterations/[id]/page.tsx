@@ -70,12 +70,20 @@ export default async function PromptIterationDetailPage({
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="min-w-0">
-          <Link
-            href="/admin/prompt-iterations"
-            className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
-          >
-            ← 返回清单
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/admin"
+              className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+            >
+              ← 后台首页
+            </Link>
+            <Link
+              href="/admin/prompt-iterations"
+              className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+            >
+              ← 返回清单
+            </Link>
+          </div>
           <h1 className="font-display mt-6 truncate text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
             {row.title}
           </h1>
@@ -83,7 +91,7 @@ export default async function PromptIterationDetailPage({
             更新：{fmt(row.updated_at)} · 创建：{fmt(row.created_at)}
           </p>
         </div>
-        <form action={adminLogout} className="flex items-center gap-2">
+        <form action={adminLogout} className="flex flex-wrap items-center gap-2">
           <Link
             href="/admin/evals"
             className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"

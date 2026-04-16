@@ -7,12 +7,20 @@ export const dynamic = "force-dynamic";
 export default async function NewPromptIterationPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      <Link
-        href="/admin/prompt-iterations"
-        className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
-      >
-        ← 返回清单
-      </Link>
+      <div className="flex flex-wrap gap-2">
+        <Link
+          href="/admin"
+          className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+        >
+          ← 后台首页
+        </Link>
+        <Link
+          href="/admin/prompt-iterations"
+          className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+        >
+          ← 返回清单
+        </Link>
+      </div>
 
       <h1 className="font-display mt-6 text-3xl font-extrabold tracking-tight text-foreground">
         新建迭代记录

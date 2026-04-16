@@ -45,7 +45,13 @@ export default async function AdminConversationsPage() {
             最近 100 条会话（按更新时间倒序）。点击可查看详情。
           </p>
         </div>
-        <form action={adminLogout} className="flex items-center gap-2">
+        <form action={adminLogout} className="flex flex-wrap items-center gap-2">
+          <Link
+            href="/admin"
+            className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+          >
+            ← 后台首页
+          </Link>
           <Link
             href="/"
             className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"

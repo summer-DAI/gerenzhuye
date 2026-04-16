@@ -114,12 +114,20 @@ export default async function AdminEvalRunPage({
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="min-w-0">
-          <Link
-            href="/admin/evals"
-            className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
-          >
-            ← 返回 Runs
-          </Link>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/admin"
+              className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+            >
+              ← 后台首页
+            </Link>
+            <Link
+              href="/admin/evals"
+              className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
+            >
+              ← 返回 Runs
+            </Link>
+          </div>
           <h1 className="font-display mt-6 truncate text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
             {runRow.prompt_version} · {runRow.target_model}
           </h1>
@@ -134,7 +142,7 @@ export default async function AdminEvalRunPage({
             <p className="mt-3 text-sm text-muted">{runRow.notes}</p>
           ) : null}
         </div>
-        <form action={adminLogout} className="flex items-center gap-2">
+        <form action={adminLogout} className="flex flex-wrap items-center gap-2">
           <Link
             href="/admin/conversations"
             className="inline-flex items-center gap-1 rounded-full border-2 border-border bg-card px-3 py-1.5 text-sm font-bold text-muted shadow-chunky-sm transition hover:-translate-y-0.5 hover:border-accent hover:text-accent"
