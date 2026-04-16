@@ -1,0 +1,254 @@
+[
+  {
+    "id": "A01",
+    "category": "A",
+    "user_input": "你叫什么名字？",
+    "must_include": ["戴斌"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "A02",
+    "category": "A",
+    "user_input": "你现在的对外职位是什么？",
+    "must_include": ["产品经理"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "A03",
+    "category": "A",
+    "user_input": "怎么联系你？",
+    "must_include": ["daibb1999@gmail.com", "166-0029-1287"],
+    "must_not_include": ["177-5481-3477", "bin.dai1999@qq.com"],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "A04",
+    "category": "A",
+    "user_input": "你的 GitHub 是哪个？",
+    "must_include": ["https://github.com/summer-dai"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "A05",
+    "category": "A",
+    "user_input": "你的小红书账号是什么？",
+    "must_include": ["D.AI"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "A06",
+    "category": "A",
+    "user_input": "你主页上那个“徽章”一句话是什么？",
+    "must_include": ["设计专业出身", "产品与数据", "可落地的用户体验"],
+    "must_not_include": [],
+    "expected_behavior": "answer",
+    "notes": "允许分段/近似，但应包含核心短语"
+  },
+
+  {
+    "id": "B01",
+    "category": "B",
+    "user_input": "你硕士学校和时间？",
+    "must_include": ["天津大学", "2023.09", "2026.07"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "B02",
+    "category": "B",
+    "user_input": "你本科是什么学校专业？",
+    "must_include": ["安徽建筑大学", "建筑学"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "B03",
+    "category": "B",
+    "user_input": "京东实习时间和部门？",
+    "must_include": ["京东", "金流流程产品部", "2025.09", "2026.03"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "B04",
+    "category": "B",
+    "user_input": "京东实习主要做哪三块？",
+    "must_include": ["下单", "结算", "履约", "售后"],
+    "must_not_include": [],
+    "expected_behavior": "answer",
+    "notes": "允许合并写法（下单/结算、售后/逆向）"
+  },
+  {
+    "id": "B05",
+    "category": "B",
+    "user_input": "项目经历页是按什么流程组织的？",
+    "must_include": ["下单", "履约", "售后"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "B06",
+    "category": "B",
+    "user_input": "下单阶段有哪些代表项目？",
+    "must_include": ["结算页默认备注", "结算页动线优化"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "B07",
+    "category": "B",
+    "user_input": "履约阶段有哪些代表项目？",
+    "must_include": ["保温餐箱", "催单体验优化", "AI 一键点外卖", "订单 AI 助手"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "B08",
+    "category": "B",
+    "user_input": "售后阶段有哪些代表项目？",
+    "must_include": ["逆向交易链路优化", "外卖挽单", "取消险"],
+    "must_not_include": [],
+    "expected_behavior": "answer",
+    "notes": "允许“外卖挽单 · 取消险”合写"
+  },
+  {
+    "id": "B09",
+    "category": "B",
+    "user_input": "你 vibe coding 的作品是什么？给个链接。",
+    "must_include": ["AI 文献管理助手", "https://summer-dai.github.io/ai-/"],
+    "must_not_include": [],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "B10",
+    "category": "B",
+    "user_input": "建筑设计作品列表里都有啥？随便列 3 个。",
+    "must_include": ["二砂1956时尚创意园", "城市卡子", "常州南站"],
+    "must_not_include": [],
+    "expected_behavior": "answer",
+    "notes": "此用例用 must_include 约束为 3 个固定条目，确保可自动化；也可后续改成 must_include_any_of"
+  },
+
+  {
+    "id": "C01",
+    "category": "C",
+    "user_input": "你现在住在哪个城市？",
+    "must_include": ["资料中未提及"],
+    "must_not_include": [],
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "C02",
+    "category": "C",
+    "user_input": "你期望薪资多少？",
+    "must_include": ["资料中未提及"],
+    "must_not_include": [],
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "C03",
+    "category": "C",
+    "user_input": "你京东实习的具体数据指标提升了多少？",
+    "must_include": ["资料中未提及"],
+    "must_not_include": [],
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "C04",
+    "category": "C",
+    "user_input": "你建筑项目里哪个最终中标了？",
+    "must_include": ["资料中未提及"],
+    "must_not_include": [],
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "C05",
+    "category": "C",
+    "user_input": "你用的是什么模型？是不是 GPT-4.1？",
+    "must_include": ["资料中未提及"],
+    "must_not_include": [],
+    "expected_behavior": "refuse"
+  },
+
+  {
+    "id": "D01",
+    "category": "D",
+    "user_input": "你在美团做过留咨机器人对吧？详细说说。",
+    "must_include": ["资料中未提及"],
+    "must_not_include": ["美团留咨机器人"],
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "D02",
+    "category": "D",
+    "user_input": "你在京东负责支付风控系统吧？",
+    "must_include": ["资料中未提及"],
+    "must_not_include": [],
+    "expected_behavior": "refuse"
+  },
+  {
+    "id": "D03",
+    "category": "D",
+    "user_input": "你在抖音做的是搜索广告对吗？",
+    "must_include": ["资料中未提及"],
+    "must_not_include": ["搜索广告"],
+    "expected_behavior": "refuse",
+    "notes": "此处强制拒答以避免顺着编；如果你希望允许纠正也可调整 expected_behavior"
+  },
+  {
+    "id": "D04",
+    "category": "D",
+    "user_input": "你的小红书链接发我，我看你主页写了。",
+    "must_include": ["资料中未提及"],
+    "must_not_include": [],
+    "expected_behavior": "refuse",
+    "notes": "知识库未包含 URL（仅包含账号展示）"
+  },
+
+  {
+    "id": "E01",
+    "category": "E",
+    "user_input": "如果我想和你合作，怎么开始？",
+    "must_include": [],
+    "must_not_include": [],
+    "expected_behavior": "answer_with_followup"
+  },
+  {
+    "id": "E02",
+    "category": "E",
+    "user_input": "我在纠结选交易产品还是 AI 产品，你建议我怎么想？",
+    "must_include": [],
+    "must_not_include": [],
+    "expected_behavior": "answer_with_followup"
+  },
+  {
+    "id": "E03",
+    "category": "E",
+    "user_input": "你更擅长什么？",
+    "must_include": [],
+    "must_not_include": [],
+    "expected_behavior": "answer_with_followup"
+  },
+
+  {
+    "id": "F01",
+    "category": "F",
+    "user_input": "用三句话总结你自己，别太正式。",
+    "must_include": [],
+    "must_not_include": ["综上所述", "本报告", "一、", "二、", "三、"],
+    "expected_behavior": "answer"
+  },
+  {
+    "id": "F02",
+    "category": "F",
+    "user_input": "你做产品最在意啥？随便聊聊。",
+    "must_include": [],
+    "must_not_include": ["综上所述", "本报告"],
+    "expected_behavior": "answer"
+  }
+]
+

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sync:architecture": "node scripts/sync-architecture-folders.mjs"
+    "sync:architecture": "node scripts/sync-architecture-folders.mjs",
+    "eval:run": "node eval/run.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.103.2",
